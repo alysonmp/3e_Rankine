@@ -551,6 +551,68 @@ public class ViewPrincipal extends JFrame{
                 }
             }
         });
+        
+        comboP1.addItemListener(new ItemListener() {
+            
+            String[] tipo = new String[2];
+            int tip = 0;
+            
+            @Override
+            public void itemStateChanged(ItemEvent ie) {
+                
+                tipo[tip] = ie.getItem().toString();
+                tip++;
+                if(tip == 2){
+                    String valor = txtP1.getText();
+                    if(!valor.isEmpty()){
+                        txtP1.setText(String.valueOf(controlConverte.converte(tipo[0],tipo[1],Double.parseDouble(valor))));
+                    } 
+                    tip = 0;
+                }
+            }
+        });
+        
+        comboTf.addItemListener(new ItemListener() {
+            
+            String[] tipo = new String[2];
+            int tip = 0;
+            
+            @Override
+            public void itemStateChanged(ItemEvent ie) {
+                
+                tipo[tip] = ie.getItem().toString();
+                tip++;
+                if(tip == 2){
+                    String valor = txtTf.getText();
+                    if(!valor.isEmpty()){
+                        txtTf.setText(String.valueOf(controlConverte.converte(tipo[0],tipo[1],Double.parseDouble(valor))));
+                    } 
+                    tip = 0;
+                }
+            }
+        });
+        
+        comboPf.addItemListener(new ItemListener() {
+            
+            String[] tipo = new String[2];
+            int tip = 0;
+            
+            @Override
+            public void itemStateChanged(ItemEvent ie) {
+                
+                tipo[tip] = ie.getItem().toString();
+                tip++;
+                if(tip == 2){
+                    String valor = txtPf.getText();
+                    if(!valor.isEmpty()){
+                        txtPf.setText(String.valueOf(controlConverte.converte(tipo[0],tipo[1],Double.parseDouble(valor))));
+                    } 
+                    tip = 0;
+                }
+            }
+        });
+        
+        
     }
 
     public JLabel getLblP1() {
@@ -776,6 +838,36 @@ public class ViewPrincipal extends JFrame{
     public void setTxtATreg(JLabel txtATreg) {
         this.txtATreg = txtATreg;
     }
-    
-    
+
+    public JComboBox getComboPf() {
+        return comboPf;
+    }
+
+    public void setComboPf(JComboBox comboPf) {
+        this.comboPf = comboPf;
+    }
+
+    public JComboBox getComboP1() {
+        return comboP1;
+    }
+
+    public void setComboP1(JComboBox comboP1) {
+        this.comboP1 = comboP1;
+    }
+
+    public JComboBox getComboTf() {
+        return comboTf;
+    }
+
+    public void setComboTf(JComboBox comboTf) {
+        this.comboTf = comboTf;
+    }
+
+    public JComboBox getComboT1() {
+        return comboT1;
+    }
+
+    public void setComboT1(JComboBox comboT1) {
+        this.comboT1 = comboT1;
+    }
 }

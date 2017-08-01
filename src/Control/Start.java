@@ -11,6 +11,7 @@ import Control.Ciclo2.ControlRegeff;
 import Control.Ciclo2.ControlRegenerador;
 import Control.Ciclo2.ControlSF;
 import Control.Ciclo2.ControlTurbina;
+import Control.Conversao.ControlConverte;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
@@ -23,17 +24,43 @@ public class Start {
     //public void iniciaCalculos(int compressor, int flu, double Tf, double Pf, double mf, double SUP, double PINCH, double Tconop, double eff, double km, int FON, double Beff, double Teff, double T1, double P1){
     public Start(Session session, ControlPrincipal ctrlPrincipal){
     
+        ControlConverte converte = new ControlConverte();
+        
         double eff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxteff().getText());
         double Beff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtBeff().getText());
         double Teff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTeff().getText());
         
         int compressor = ctrlPrincipal.getViewPrincipal().getComp();
         
-        double Pf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPf().getText());
-        double Tf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTf().getText());
+        double Tf;
+        if(!ctrlPrincipal.getViewPrincipal().getComboTf().getSelectedItem().toString().equals("K")){
+            Tf = converte.converte(ctrlPrincipal.getViewPrincipal().getComboTf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTf().getText()));
+        }else{
+            Tf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTf().getText());
+        }
+        
+        double Pf;
+        if(!ctrlPrincipal.getViewPrincipal().getComboPf().getSelectedItem().toString().equals("K")){
+            Pf = converte.converte(ctrlPrincipal.getViewPrincipal().getComboPf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPf().getText()));
+        }else{
+            Pf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPf().getText());
+        }
+        
         double mf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtMf().getText());
-        double P1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtP1().getText());
-        double T1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtT1().getText());        
+        
+        double P1;
+        if(!ctrlPrincipal.getViewPrincipal().getComboP1().getSelectedItem().toString().equals("kPa")){
+            P1 = converte.converte(ctrlPrincipal.getViewPrincipal().getComboP1().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtP1().getText()));
+        }else{
+            P1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtP1().getText());
+        }
+        
+        double T1;
+        if(!ctrlPrincipal.getViewPrincipal().getComboT1().getSelectedItem().toString().equals("K")){
+            T1 = converte.converte(ctrlPrincipal.getViewPrincipal().getComboT1().getSelectedItem().toString(), "K", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtT1().getText()));
+        }else{
+            T1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtT1().getText());
+        }
         
         double PINCH = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPINCH().getText());   
         double SUP = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtSUP().getText());
