@@ -64,6 +64,7 @@ import Control.TabelaFluidos.ControlTolueneGas;
 import Control.TabelaFluidos.ControlTolueneLiquido;
 import Control.TabelaFluidos.ControlWaterGas;
 import Control.TabelaFluidos.ControlWaterLiquido;
+import Dao.ControlConexao;
 import Model.ModelCore;
 import Model.Ciclo2.ModelFluidos;
 import Model.ModelCVA;
@@ -91,11 +92,16 @@ import Model.TabelasFluidos.ModelCompressor;
 import Model.TabelasFluidos.ModelCompressor5;
 import Util.HibernateUtil;
 import View.ViewPrincipal;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -106,10 +112,12 @@ import org.hibernate.criterion.Restrictions;
 
 public class ControlPrincipal {
     private ViewPrincipal viewPrincipal;
-    Session session;
-    
+    private Session session;
+    private ControlConexao conexao;
+            
     @SuppressWarnings("empty-statement")
     public ControlPrincipal(){
+        conexao = new ControlConexao();
         SessionFactory sf = HibernateUtil.getSessionFactory();
         this.session = sf.openSession();
                 
@@ -770,7 +778,18 @@ public class ControlPrincipal {
         viewPrincipal.pack();
         viewPrincipal.setTitle("RANKINE");
         viewPrincipal.setVisible(true);
-        viewPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        viewPrincipal.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        viewPrincipal.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                try {
+                    conexao.getConn().close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControlPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.exit(0);
+            }
+        });
     }
 
     public List getFluidos(){
