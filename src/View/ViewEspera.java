@@ -8,23 +8,12 @@ package View;
 import Control.ControlPrincipal;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.swing.BorderFactory;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -56,6 +45,7 @@ public class ViewEspera{
         panelEspera.add(labelMensagem, BorderLayout.EAST);
         panelEspera.setSize(200,100);
         panelEspera.setBackground(new Color(255,255,255));  
+        panelEspera.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
     public JPanel getPanelEspera() {
