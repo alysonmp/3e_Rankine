@@ -96,8 +96,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -293,13 +294,15 @@ public class ControlPrincipal {
          tx = session.beginTransaction();
         
         if(results.isEmpty()){
-            String csvFile = "src/Csv/Core.csv";
+            String csvFile = "/Csv/Core.csv";
+            InputStream is = getClass().getResourceAsStream(csvFile);
+            
             BufferedReader br = null;
             String line = "";
             String csvSplitBy = ";";
             
             try{
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     String[] table_c = line.split(csvSplitBy);
                     this.session.save(new ModelCore(Double.parseDouble(table_c[0]),Double.parseDouble(table_c[1]),Double.parseDouble(table_c[2]),Double.parseDouble(table_c[3]),Double.parseDouble(table_c[4]),Double.parseDouble(table_c[5]),Double.parseDouble(table_c[6]),Double.parseDouble(table_c[7]),Double.parseDouble(table_c[8]),Double.parseDouble(table_c[9])));
@@ -325,13 +328,15 @@ public class ControlPrincipal {
         tx = session.beginTransaction();
         
         if(results.isEmpty()){
-            String csvFile = "src/Csv/C.csv";
+            String csvFile = "/Csv/C.csv";
+            InputStream is = getClass().getResourceAsStream(csvFile);
+            
             BufferedReader br = null;
             String line = "";
             String csvSplitBy = ";";
             
             try{
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[6];
                     String[] table_c = line.split(csvSplitBy);
@@ -354,11 +359,12 @@ public class ControlPrincipal {
                 }
             }
             
-            csvFile = "src/Csv/CC.csv";
+            csvFile = "/Csv/CC.csv";
+            is = getClass().getResourceAsStream(csvFile);
             br = null;
             
             try{
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[7];
                     String[] table_c = line.split(csvSplitBy);
@@ -422,7 +428,8 @@ public class ControlPrincipal {
         
         if(results.isEmpty()){
             tx = session.beginTransaction();
-            String csvFile = "src/Csv/Qfpso.csv";
+            String csvFile = "/Csv/Qfpso.csv";
+            InputStream is = getClass().getResourceAsStream(csvFile);
             BufferedReader br = null;
             String line = "";
             String csvSplitBy = ";";
@@ -430,7 +437,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelQfpsoKCSMat.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[12];
                     String[] table_c = line.split(csvSplitBy);
@@ -492,7 +499,9 @@ public class ControlPrincipal {
         tx = session.beginTransaction();
         
         if(results.isEmpty()){
-            String csvFile = "src/Csv/Cva.csv";
+            String csvFile = "/Csv/Cva.csv";
+            InputStream is = getClass().getResourceAsStream(csvFile);
+            
             BufferedReader br = null;
             String line = "";
             String csvSplitBy = ";";
@@ -501,7 +510,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelCVA.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     String[] table_c = line.split(csvSplitBy);
                     for(int i = 0; i < table_c.length; i++){
@@ -524,7 +533,8 @@ public class ControlPrincipal {
                 }
             }
             
-            csvFile = "src/Csv/Cvb.csv";
+            csvFile = "/Csv/Cvb.csv";
+            is = getClass().getResourceAsStream(csvFile);
             br = null;
             line = "";
             csvSplitBy = ";";
@@ -533,7 +543,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelCVB.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     String[] table_c = line.split(csvSplitBy);
                     for(int i = 0; i < table_c.length; i++){
@@ -563,7 +573,8 @@ public class ControlPrincipal {
         tx = session.beginTransaction();
         
         if(results.isEmpty()){
-            String csvFile = "src/Csv/drt70.csv";
+            String csvFile = "/Csv/drt70.csv";
+            InputStream is = getClass().getResourceAsStream(csvFile);
             BufferedReader br = null;
             String line = "";
             String csvSplitBy = ";";
@@ -571,7 +582,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelDRT70.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[5];
                     String[] table_c = line.split(csvSplitBy);
@@ -595,7 +606,8 @@ public class ControlPrincipal {
                 }
             }
             
-            csvFile = "src/Csv/drt80.csv";
+            csvFile = "/Csv/drt80.csv";
+            is = getClass().getResourceAsStream(csvFile);
             br = null;
             line = "";
             csvSplitBy = ";";
@@ -603,7 +615,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelDRT80.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[4];
                     String[] table_c = line.split(csvSplitBy);
@@ -627,7 +639,9 @@ public class ControlPrincipal {
                 }
             }
             
-            csvFile = "src/Csv/eqro.csv";
+            csvFile = "/Csv/eqro.csv";
+            is = getClass().getResourceAsStream(csvFile);
+            
             br = null;
             line = "";
             csvSplitBy = ";";
@@ -635,7 +649,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelEqro.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[3];
                     String[] table_c = line.split(csvSplitBy);
@@ -659,7 +673,9 @@ public class ControlPrincipal {
                 }
             }
             
-            csvFile = "src/Csv/eqrs.csv";
+            csvFile = "/Csv/eqrs.csv";
+            is = getClass().getResourceAsStream(csvFile);
+            
             br = null;
             line = "";
             csvSplitBy = ";";
@@ -667,7 +683,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelEqrs.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[3];
                     String[] table_c = line.split(csvSplitBy);
@@ -698,7 +714,9 @@ public class ControlPrincipal {
         results = cr.list();
         tx = session.beginTransaction();
         if(results.isEmpty()){
-            String csvFile = "src/Csv/compre1_4_gas.csv";
+            String csvFile = "/Csv/compre1_4_gas.csv";
+            InputStream is = getClass().getResourceAsStream(csvFile);
+            
             BufferedReader br = null;
             String line = "";
             String csvSplitBy = ";";
@@ -706,7 +724,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelCompressor.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[8];
                     String[] table_c = line.split(csvSplitBy);
@@ -730,7 +748,9 @@ public class ControlPrincipal {
                 }
             }
             
-            csvFile = "src/Csv/compre5_gas.csv";
+            csvFile = "/Csv/compre5_gas.csv";
+            is = getClass().getResourceAsStream(csvFile);
+            
             br = null;
             line = "";
             csvSplitBy = ";";
@@ -738,7 +758,7 @@ public class ControlPrincipal {
             try{
                 cr = this.session.createCriteria(ModelCompressor5.class);
                 results = cr.list();
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 while((line = br.readLine()) != null){
                     double[] valoresV = new double[8];
                     String[] table_c = line.split(csvSplitBy);

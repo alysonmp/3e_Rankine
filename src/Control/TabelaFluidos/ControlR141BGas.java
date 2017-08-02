@@ -5,18 +5,17 @@
  */
 package Control.TabelaFluidos;
 
-import Model.Ciclo2.ModelFluidos;
 import Model.TabelasFluidos.ModelR141BGas;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 
 /**
@@ -39,7 +38,9 @@ public class ControlR141BGas {
     }
     
     public void criaTabelaR141BGas(){
-        String csvFile = "src/Csv/R141B_gas.csv";
+        String csvFile = "/Csv/R141B_gas.csv";
+        InputStream is = getClass().getResourceAsStream(csvFile);
+        
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ";";
@@ -51,7 +52,7 @@ public class ControlR141BGas {
             List results = cr.list();
             
             if(results.isEmpty()){
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 line = br.readLine();
                 while ((line = br.readLine()) != null) {
 
