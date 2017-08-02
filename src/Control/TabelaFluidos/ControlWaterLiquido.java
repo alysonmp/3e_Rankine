@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
@@ -35,7 +37,9 @@ public class ControlWaterLiquido {
     }
     
     public void criaTabelaWaterLiquido(){
-        String csvFile = "src/Csv/WATER_liquido.csv";
+        String csvFile = "/Csv/WATER_liquido.csv";
+        InputStream is = getClass().getResourceAsStream(csvFile);
+        
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ";";
@@ -47,7 +51,7 @@ public class ControlWaterLiquido {
             List results = cr.list();
             
             if(results.isEmpty()){
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 line = br.readLine();
                 while ((line = br.readLine()) != null) {
 

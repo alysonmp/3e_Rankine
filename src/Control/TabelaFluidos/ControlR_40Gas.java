@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
@@ -36,7 +38,9 @@ public class ControlR_40Gas {
     }
     
     public void criaTabelaR_40Gas(){
-        String csvFile = "src/Csv/R-40_gas.csv";
+        String csvFile = "/Csv/R-40_gas.csv";
+        InputStream is = getClass().getResourceAsStream(csvFile);
+        
         BufferedReader br = null;
         String line = "";
         String csvSplitBy = ";";
@@ -46,7 +50,7 @@ public class ControlR_40Gas {
             List results = cr.list();
             
             if(results.isEmpty()){
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 line = br.readLine();
                 while((line = br.readLine()) != null){
                     String[] r_40_g = line.split(csvSplitBy);

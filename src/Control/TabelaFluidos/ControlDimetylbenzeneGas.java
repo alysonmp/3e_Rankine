@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
@@ -36,7 +38,9 @@ public class ControlDimetylbenzeneGas {
     }
     
     public void criaTabelaDimetylbenzeneGas(){
-        String csvFile = "src/Csv/Dimetylbenzene_gas.csv";
+        String csvFile = "/Csv/Dimetylbenzene_gas.csv";
+        InputStream is = getClass().getResourceAsStream(csvFile);
+        
         BufferedReader br = null;
         String line = "";
         String csvSplitBy = ";";
@@ -46,7 +50,7 @@ public class ControlDimetylbenzeneGas {
             List results = cr.list();
             
             if(results.isEmpty()){
-                br = new BufferedReader(new FileReader(csvFile));
+                br = new BufferedReader(new InputStreamReader(is));
                 line = br.readLine();
                 while((line = br.readLine()) != null){
                     String[] dimetylbenzene_g = line.split(csvSplitBy);
