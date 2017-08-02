@@ -12,11 +12,17 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,9 +40,13 @@ public class ViewEspera{
     private JLabel labelMensagem;
     
     public ViewEspera(ControlPrincipal ctrlPrincipal) {
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/Images/Load/loading4.gif").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+    		
+        //ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/Images/Load/loading4.gif").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
         
-        labelEspera = new JLabel(imageIcon);
+    		URL url = this.getClass().getResource("/Images/Load/loading4.gif");
+        Icon icon = new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+    	
+        labelEspera = new JLabel(icon);
         panelEspera = new JPanel();
         labelMensagem = new JLabel("Realizando cálculos   ");
         
