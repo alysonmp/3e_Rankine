@@ -41,7 +41,7 @@ public class ControlCompressor {
         this.session = session;
     }
     
-    public void criaTabelaWaterGas(){
+    public void criaTabelaCompressor(){
         String csvFile = "/Csv/compre1_4_gas.csv";
         InputStream is = getClass().getResourceAsStream(csvFile);
         
@@ -97,21 +97,21 @@ public class ControlCompressor {
 
             consulta = this.session.createSQLQuery("select * from compressor_1_4 where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
 
-            consulta.setResultTransformer(Transformers.aliasToBean(ModelWaterGas.class));//Sem isso aqui impossível de retornar
+            consulta.setResultTransformer(Transformers.aliasToBean(ModelCompressor.class));//Sem isso aqui impossível de retornar
             compress = consulta.list(); 
             if(!compress.isEmpty())
                 compr2 = compress.get(0);
 
             consulta = this.session.createSQLQuery("select * from compressor_1_4 where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
 
-            consulta.setResultTransformer(Transformers.aliasToBean(ModelWaterGas.class));//Sem isso aqui impossível de retornar
+            consulta.setResultTransformer(Transformers.aliasToBean(ModelCompressor.class));//Sem isso aqui impossível de retornar
             compress = consulta.list(); 
             if(!compress.isEmpty())
                 compr3 = compress.get(0);
 
             consulta = this.session.createSQLQuery("select * from compressor_1_4 where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
 
-            consulta.setResultTransformer(Transformers.aliasToBean(ModelWaterGas.class));//Sem isso aqui impossível de retornar
+            consulta.setResultTransformer(Transformers.aliasToBean(ModelCompressor.class));//Sem isso aqui impossível de retornar
             compress = consulta.list(); 
             if(!compress.isEmpty())
                 compr4 = compress.get(0);
