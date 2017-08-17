@@ -24,7 +24,7 @@ public class ControlEvpeff {
    
     private double AT, Aho, Aco, Vhx, Lh, Lc, L3, DPh, DPc;
     
-    public ControlEvpeff(double P1, double P6, double T1, double T6, int ii, double SUP, double Hlat, double Hsen, double Hsup, int compressor, double m, double mf, double T1s, double Tf, double Tfout, double Pf, int FON, double PINCH, double UASUP, double UALAT, double UASEN, double km, Session session){
+    public ControlEvpeff(double P1, double P6, double T1, double T6, int ii, double SUP, double Hlat, double Hsen, double Hsup, int compressor, double m, double mf, double T1s, double Tf, double Tfout, double Pf, int FON, double PINCH, double UASUP, double UALAT, double UASEN, double km, int coreInt, Session session){
     
         double Tf2 = T1s+PINCH;
         double Qsen = m*Hsen;
@@ -275,7 +275,7 @@ public class ControlEvpeff {
         }
         
         cr = session.createCriteria(ModelCore.class);
-        cr.add(Restrictions.eq("cod", ii));
+        cr.add(Restrictions.eq("cod", coreInt));
         results = cr.list();
         ModelCore core = (ModelCore) results.get(0);
         
@@ -292,7 +292,7 @@ public class ControlEvpeff {
         double por1 = core.getPor();
         
         cr = session.createCriteria(ModelCore.class);
-        cr.add(Restrictions.eq("cod", ii));
+        cr.add(Restrictions.eq("cod", coreInt));
         results = cr.list();
         core = (ModelCore) results.get(0);
         

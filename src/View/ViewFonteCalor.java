@@ -25,14 +25,12 @@ import javax.swing.JTextField;
  *
  * @author leonardo
  */
-public class ViewFonteCalor {
+public class ViewFonteCalor extends JPanel{
     
-    private JPanel painelFon = new JPanel(new GridBagLayout());
-    
-    private JLabel lblcompressor = new JLabel("Compressor: ");
-    private JLabel lblTf = new JLabel("Tf: ");
-    private JLabel lblPf = new JLabel("Pf: ");
-    private JLabel lblMf = new JLabel("Mf: ");
+    private JLabel lblcompressor = new JLabel("Fonte de Calor: ");
+    private JLabel lblTf = new JLabel("<html>T<sub>f</sub></html>");
+    private JLabel lblPf = new JLabel("<html>P<sub>f</sub></html>");
+    private JLabel lblMf = new JLabel("<html>&#7745;<sub>f</sub></html>");
     
     private JTextField txtTf = new JTextField("431.15");
     private JTextField txtPf = new JTextField("408.35");
@@ -54,70 +52,73 @@ public class ViewFonteCalor {
     
     public ViewFonteCalor(ControlPrincipal ctrlPrincipal){
         controlConverte = new ControlConverte();
-        painelFon.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(1, Color.lightGray, Color.lightGray), "Entrada", 1, 2, new Font("Times New Roman", 1, 12), Color.darkGray));
+        this.setLayout(new GridBagLayout());
+        this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(1, Color.lightGray, Color.lightGray), "Entrada", 1, 2, new Font("Times New Roman", 1, 12), Color.darkGray));
         
         GridBagConstraints g = new GridBagConstraints();
         
+        Font font = new Font("Arial", 0, 14);
+        lblMf.setFont(font);
         
         g.gridx = 0;
         g.gridy = 0;
         g.gridwidth = 1;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(lblcompressor,g);
+        this.add(lblcompressor,g);
         
         g.gridx = 1;
         g.gridy = 0;
         g.gridwidth = 2;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(cmbCompressor,g);
+        this.add(cmbCompressor,g);
         
         g.gridx = 0;
         g.gridy = 1;
         g.gridwidth = 1;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(lblTf,g);
+        this.add(lblTf,g);
         
         g.gridx = 1;
         g.gridy = 1;
         g.gridwidth = 2;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(txtTf,g);
+        this.add(txtTf,g);
         
         g.gridx = 3;
         g.gridy = 1;
         g.gridwidth = 1;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(comboTf,g);
+        this.add(comboTf,g);
         
         g.gridx = 0;
         g.gridy = 2;
         g.gridwidth = 1;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(lblPf,g);
+        this.add(lblPf,g);
         
         g.gridx = 1;
         g.gridy = 2;
         g.gridwidth = 2;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(txtPf,g);
+        this.add(txtPf,g);
         
         g.gridx = 3;
         g.gridy = 2;
         g.gridwidth = 1;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(comboPf,g);
+        this.add(comboPf,g);
         
         g.gridx = 0;
         g.gridy = 3;
         g.gridwidth = 1;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(lblMf,g);
+        this.add(lblMf,g);
         
         g.gridx = 1;
         g.gridy = 3;
         g.gridwidth = 2;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelFon.add(txtMf,g);
+        this.add(txtMf,g);
         
         cmbCompressor.addActionListener(new ActionListener() {
             @Override
@@ -211,10 +212,6 @@ public class ViewFonteCalor {
                 }
             }
         });
-    }
-
-    public JPanel getPainelFon() {
-        return painelFon;
     }
 
     public JLabel getLblcompressor() {

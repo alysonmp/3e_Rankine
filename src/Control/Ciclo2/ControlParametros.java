@@ -38,7 +38,7 @@ public class ControlParametros {
         
         ModelCriticasKCSMat_Tc criticas_tc = (ModelCriticasKCSMat_Tc) results.get(0);
         
-        P = criticas_pc.getValor()*0.95; //Alterar para 0.9
+        P = criticas_pc.getValor()*0.9; //Alterar para 0.9
         
         ControlPdeVapor pdevapor = new ControlPdeVapor(Tevp1, ii, session);
         P1 = pdevapor.getPs2();

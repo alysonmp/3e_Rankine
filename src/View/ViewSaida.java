@@ -18,12 +18,12 @@ public class ViewSaida extends JFrame{
 	JLabel lblWt = new JLabel("Wt");
 	JLabel lblWn = new JLabel("Wn");
 	JLabel lblWb = new JLabel("Wb");
-	JLabel lblQevp = new JLabel("Qevp");
-	JLabel lblQcon = new JLabel("QCon");
-	JLabel lblQreg = new JLabel("Qreg");
+	JLabel lblQevp = new JLabel("<html>Q<sub>evp</sub></html>");
+	JLabel lblQcon = new JLabel("<html>Q<sub>Con</sub></html>");
+	JLabel lblQreg = new JLabel("<html>Q<sub>reg</sub></html>");
 	JLabel lblATevp = new JLabel("<html>At<sub>evp</sub></html>");
-	JLabel lblATcon = new JLabel("Atcon");
-	JLabel lblATreg = new JLabel("Atreg");
+	JLabel lblATcon = new JLabel("<html>At<sub>con</sub></html>");
+	JLabel lblATreg = new JLabel("<html>At<sub>reg</sub></html>");
 	JLabel lblAt = new JLabel("At");
 	
 	//FIELDS
