@@ -29,47 +29,47 @@ public class Start {
         ControlConverte converte = new ControlConverte();
         
         double eff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxteff().getText());
-        double Beff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtBeff().getText());
-        double Teff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTeff().getText());
+        double Beff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtBeff().getText());
+        double Teff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtTeff().getText());
         
-        int compressor = ctrlPrincipal.getViewPrincipal().getComp();
+        int compressor = ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComp();
         
         double Tf;
-        if(!ctrlPrincipal.getViewPrincipal().getComboTf().getSelectedItem().toString().equals("K")){
-            Tf = converte.converte(ctrlPrincipal.getViewPrincipal().getComboTf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTf().getText()));
+        if(!ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComboTf().getSelectedItem().toString().equals("K")){
+            Tf = converte.converte(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComboTf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTf().getText()));
         }else{
-            Tf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTf().getText());
+            Tf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getTxtTf().getText());
         }
         
         double Pf;
-        if(!ctrlPrincipal.getViewPrincipal().getComboPf().getSelectedItem().toString().equals("K")){
-            Pf = converte.converte(ctrlPrincipal.getViewPrincipal().getComboPf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPf().getText()));
+        if(!ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComboPf().getSelectedItem().toString().equals("K")){
+            Pf = converte.converte(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComboPf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPf().getText()));
         }else{
-            Pf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPf().getText());
+            Pf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getTxtPf().getText());
         }
         
-        double mf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtMf().getText());
+        double mf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getTxtMf().getText());
         
         double P1;
-        if(!ctrlPrincipal.getViewPrincipal().getComboP1().getSelectedItem().toString().equals("kPa")){
-            P1 = converte.converte(ctrlPrincipal.getViewPrincipal().getComboP1().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtP1().getText()));
+        if(!ctrlPrincipal.getViewPrincipal().ViewDadosOperacionais().getComboP1().getSelectedItem().toString().equals("kPa")){
+            P1 = converte.converte(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getComboP1().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtP1().getText()));
         }else{
-            P1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtP1().getText());
+            P1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtP1().getText());
         }
         
         double T1;
-        if(!ctrlPrincipal.getViewPrincipal().getComboT1().getSelectedItem().toString().equals("K")){
-            T1 = converte.converte(ctrlPrincipal.getViewPrincipal().getComboT1().getSelectedItem().toString(), "K", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtT1().getText()));
+        if(!ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getComboT1().getSelectedItem().toString().equals("K")){
+            T1 = converte.converte(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getComboT1().getSelectedItem().toString(), "K", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtT1().getText()));
         }else{
-            T1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtT1().getText());
+            T1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtT1().getText());
         }
         
         double PINCH = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPINCH().getText());   
-        double SUP = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtSUP().getText());
+        double SUP = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtSUP().getText());
         double km = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtkm().getText());
         
         int flu = ctrlPrincipal.getViewPrincipal().getFlu();
-        int FON = ctrlPrincipal.getViewPrincipal().getFON();
+        int FON = ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getFON();
         
         ControlParametros parametros = new ControlParametros(Tf, flu, session);
         if(!parametros.getMensagem().equals("")){
