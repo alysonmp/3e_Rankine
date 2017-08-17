@@ -5,6 +5,7 @@
  */
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
@@ -22,18 +23,19 @@ public class ViewInicio {
     private JPanel painelInicio;
     
     public ViewInicio() {
-        viewInicio = new JFrame();
-        painelInicio = new JPanel();
+    		viewInicio = new JFrame();
+        painelInicio = new JPanel(new BorderLayout());
         
         JLabel l = new JLabel("\n\nAguarde...");
         l.setFont(new Font("TimesRoman",Font.BOLD,50));
         
+        l.setHorizontalAlignment(JLabel.CENTER);
+        l.setVerticalAlignment(JLabel.CENTER);
         
         painelInicio.add(l);
         painelInicio.setBorder(BorderFactory.createLineBorder(Color.black));
         
         viewInicio.add(painelInicio);
-        
         
         viewInicio.setUndecorated(true);
         viewInicio.setSize(400,200);
