@@ -13,6 +13,7 @@ import Control.Ciclo2.ControlSF;
 import Control.Ciclo2.ControlTurbina;
 import Control.Conversao.ControlConverte;
 import View.ViewSaida;
+import javafx.scene.transform.TransformChangedEvent;
 
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -28,48 +29,47 @@ public class Start {
     
         ControlConverte converte = new ControlConverte();
         
-        double eff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxteff().getText());
-        double Beff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtBeff().getText());
-        double Teff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtTeff().getText());
+        double eff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldRegEff().getText());
+        double Beff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtBeff().getText());
+        double Teff = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtTeff().getText());
         
-        int compressor = ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComp();
+        int compressor = ctrlPrincipal.getViewPrincipal().getFonteCalor().getComp();
         
         double Tf;
-        if(!ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComboTf().getSelectedItem().toString().equals("K")){
-            Tf = converte.converte(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComboTf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtTf().getText()));
+        if(!ctrlPrincipal.getViewPrincipal().getFonteCalor().getComboTf().getSelectedItem().toString().equals("K")){
+            Tf = converte.converte(ctrlPrincipal.getViewPrincipal().getFonteCalor().getComboTf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getFonteCalor().getTxtTf().getText()));
         }else{
-            Tf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getTxtTf().getText());
+            Tf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getFonteCalor().getTxtTf().getText());
         }
         
         double Pf;
-        if(!ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComboPf().getSelectedItem().toString().equals("K")){
-            Pf = converte.converte(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getComboPf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPf().getText()));
+        if(!ctrlPrincipal.getViewPrincipal().getFonteCalor().getComboPf().getSelectedItem().toString().equals("K")){
+            Pf = converte.converte(ctrlPrincipal.getViewPrincipal().getFonteCalor().getComboPf().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getFonteCalor().getTxtPf().getText()));
         }else{
-            Pf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getTxtPf().getText());
+            Pf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getFonteCalor().getTxtPf().getText());
         }
         
-        double mf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getTxtMf().getText());
+        double mf = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getFonteCalor().getTxtMf().getText());
         
         double P1;
-        if(!ctrlPrincipal.getViewPrincipal().ViewDadosOperacionais().getComboP1().getSelectedItem().toString().equals("kPa")){
-            P1 = converte.converte(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getComboP1().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtP1().getText()));
+        if(!ctrlPrincipal.getViewPrincipal().getDadosOp().getComboP1().getSelectedItem().toString().equals("kPa")){
+            P1 = converte.converte(ctrlPrincipal.getViewPrincipal().getDadosOp().getComboP1().getSelectedItem().toString(), "kPa", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtP1().getText()));
         }else{
-            P1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtP1().getText());
+            P1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtP1().getText());
         }
         
         double T1;
-        if(!ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getComboT1().getSelectedItem().toString().equals("K")){
-            T1 = converte.converte(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getComboT1().getSelectedItem().toString(), "K", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtT1().getText()));
+        if(!ctrlPrincipal.getViewPrincipal().getDadosOp().getComboT1().getSelectedItem().toString().equals("K")){
+            T1 = converte.converte(ctrlPrincipal.getViewPrincipal().getDadosOp().getComboT1().getSelectedItem().toString(), "K", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtT1().getText()));
         }else{
-            T1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtT1().getText());
+            T1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtT1().getText());
         }
         
-        double PINCH = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtPINCH().getText());   
-        double SUP = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getViewDadosOperacionais().getTxtSUP().getText());
-        double km = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTxtkm().getText());
+        double PINCH = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtPINCH().getText());   
+        double SUP = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtSUP().getText());
         
-        int flu = ctrlPrincipal.getViewPrincipal().getFlu();
-        int FON = ctrlPrincipal.getViewPrincipal().getViewFonteCalor().getFON();
+        int flu = ctrlPrincipal.getViewPrincipal().getDadosOp().getFlu();
+        int FON = ctrlPrincipal.getViewPrincipal().getFonteCalor().getFON();
         
         ControlParametros parametros = new ControlParametros(Tf, flu, session);
         if(!parametros.getMensagem().equals("")){
@@ -86,6 +86,10 @@ public class Start {
         double Tcri = parametros.getTcri();
         double Pcri = parametros.getPcri();
 
+        if(!ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtTcon().getText().toString().equals("")){
+        		Tconop = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtTcon().getText().toString());
+        }
+        
         double G = 1;
         
         int ii = flu;
@@ -251,7 +255,10 @@ public class Start {
         
         double ecg = ec*100;
         
-        ControlEvpeff evpeff = new ControlEvpeff(P1, P6, T1, T6, ii, SUP, Hlat, Hsen, Hsup, compressor, m, mf, T1s, Tf, Tfout, Pf, FON, PINCH, UASUP, UALAT, UASEN, km, session);
+        double k = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldEvapK().getText());
+        int core = Integer.parseInt(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldEvapCore().getText());
+        
+        ControlEvpeff evpeff = new ControlEvpeff(P1, P6, T1, T6, ii, SUP, Hlat, Hsen, Hsup, compressor, m, mf, T1s, Tf, Tfout, Pf, FON, PINCH, UASUP, UALAT, UASEN, k, core, session);
         double ATevp = evpeff.getAT();
         double Ahoevp = evpeff.getAho();
         double Acoevp = evpeff.getAco();
@@ -262,7 +269,10 @@ public class Start {
         double DPhevp = evpeff.getDPh();
         double DPcevp = evpeff.getDPc();
 
-        ControlConeff coneff = new ControlConeff(P4, P3, m, mH2O, ii, Ten, Ten1, Ts, T3, T4, UACONs, UACONl, Pen, km, session);
+        k = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldCondK().getText());
+        core = Integer.parseInt(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldCondCore().getText());
+        
+        ControlConeff coneff = new ControlConeff(P4, P3, m, mH2O, ii, Ten, Ten1, Ts, T3, T4, UACONs, UACONl, Pen, k, core, session);
         double ATcon = coneff.getAT();
         double Ahocon = coneff.getAho();
         double Acocon = coneff.getAco();
@@ -273,7 +283,10 @@ public class Start {
         double DPhcon = coneff.getDph();
         double DPccon = coneff.getDpc();
                 
-        ControlRegeff regeff = new ControlRegeff(ii, UAREG, T2, T3, T5, T6, m, eff, P5, P6, P2, P3, km, session);
+        k = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldRegK().getText());
+        core = Integer.parseInt(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldRegCore().getText());
+        
+        ControlRegeff regeff = new ControlRegeff(ii, UAREG, T2, T3, T5, T6, m, eff, P5, P6, P2, P3, k, core, session);
         double ATreg = regeff.getAT();
         double Ahoreg = regeff.getAho();
         double Acoreg = regeff.getAco();

@@ -13,7 +13,7 @@ public class ControlRegeff {
 
     private double AT, Aho, Aco, Vhx, Lh, Lc, L3, DPh, DPc;
     
-    public ControlRegeff(int ii, double UAREG, double T2, double T3, double T5, double T6, double m, double eff, double P5, double P6, double P2, double P3, double km, Session session) {
+    public ControlRegeff(int ii, double UAREG, double T2, double T3, double T5, double T6, double m, double eff, double P5, double P6, double P2, double P3, double km, int coreInt, Session session) {
         
         double Rehsup, fhsup, jhsup, Recsup, fcsup,jcsup,hhsup,hcsup,m1sup,lh,m2sup,
                 lc,e1sup,e2sup,e1gsup,e2gsup,iUsup,Ugsup,Ahsup,Ahosup,Acsup,Acosup,
@@ -105,7 +105,7 @@ public class ControlRegeff {
         }
  
         cr = session.createCriteria(ModelCore.class);
-        cr.add(Restrictions.eq("cod", 9));
+        cr.add(Restrictions.eq("cod", coreInt));
         results = cr.list();
         ModelCore core = (ModelCore) results.get(0);
         
@@ -121,7 +121,7 @@ public class ControlRegeff {
         double por1 = core.getPor();
         
         cr = session.createCriteria(ModelCore.class);
-        cr.add(Restrictions.eq("cod", 9));
+        cr.add(Restrictions.eq("cod", coreInt));
         results = cr.list();
         core = (ModelCore) results.get(0);
         

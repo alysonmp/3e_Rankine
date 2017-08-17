@@ -13,7 +13,7 @@ public class ControlConeff {
 
     private double AT, Aho, Aco, Vhx, Lh, Lc, L3, Dph, Dpc;
     
-    public ControlConeff(double P4,double P3, double m, double mH2O, int ii, double Ten, double Ten1, double Ts, double T3, double T4, double UACONs, double UACONl, double Pen, double km, Session session) {
+    public ControlConeff(double P4,double P3, double m, double mH2O, int ii, double Ten, double Ten1, double Ts, double T3, double T4, double UACONs, double UACONl, double Pen, double km, int coreInt, Session session) {
        
         double Ghsup,Gcsup,Achlat,Achsup,epCONs,NTUsup,Ncsup,Nhsup,Accsup,
                 Cclat,Chlat,Clatmin,Ckatmax,C,Ntulat,epCONl,NcCONl,NhCONl,
@@ -159,7 +159,7 @@ public class ControlConeff {
         }
         
         cr = session.createCriteria(ModelCore.class);
-        cr.add(Restrictions.eq("cod", 9));
+        cr.add(Restrictions.eq("cod", coreInt));
         results = cr.list();
         ModelCore core = (ModelCore) results.get(0);
         
@@ -175,7 +175,7 @@ public class ControlConeff {
         double por1 = core.getPor();
         
         cr = session.createCriteria(ModelCore.class);
-        cr.add(Restrictions.eq("cod", 9));
+        cr.add(Restrictions.eq("cod", coreInt));
         results = cr.list();
         core = (ModelCore) results.get(0);
         
