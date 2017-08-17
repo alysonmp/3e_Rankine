@@ -25,10 +25,11 @@ public class ControlConexao {
     
     public ControlConexao() {
         try {
-            NetworkServerControl server = new NetworkServerControl(InetAddress.getByName("localhost"),1527);
+            NetworkServerControl server = new NetworkServerControl(InetAddress.getByName("localhost"),1529);
             server.start(null);
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection(dbURL);
+            System.out.println("Conectado");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Falha na conexão com o banco de dados, abra o programa novamente");
             System.exit(0);

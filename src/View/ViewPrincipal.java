@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -135,7 +136,7 @@ public class ViewPrincipal extends JFrame{
         comboFluidos.setFont(new Font("Arial", 0, 11));
         
         GridBagConstraints g = new GridBagConstraints();
-       
+        
         //PANEL ENTRADA
         g.gridx = 0;
         g.gridy = 0;
@@ -148,18 +149,6 @@ public class ViewPrincipal extends JFrame{
         g.gridwidth = 2;
         g.fill = GridBagConstraints.HORIZONTAL;
         painelEntrada.add(cmbCompressor,g);
-        
-        g.gridx = 0;
-        g.gridy = 1;
-        g.gridwidth = 1;
-        g.fill = GridBagConstraints.HORIZONTAL;
-        painelEntrada.add(lblFluido,g);
-        
-        g.gridx = 1;
-        g.gridy = 1;
-        g.gridwidth = 2;
-        g.fill = GridBagConstraints.HORIZONTAL;
-        painelEntrada.add(comboFluidos,g);
         
         g.gridx = 0;
         g.gridy = 2;
@@ -424,19 +413,33 @@ public class ViewPrincipal extends JFrame{
         //PAINEL MAIOR
         g.gridx = 0;
         g.gridy = 0;
-        g.gridwidth = 3;
+        g.gridwidth = 1;
         g.fill = GridBagConstraints.HORIZONTAL;
-        painelDados.add(painelEntrada,g);
+        painelDados.add(lblFluido,g);
+        
+        g.gridx = 1;
+        g.gridy = 0;
+        g.gridwidth = 2;
+        g.fill = GridBagConstraints.HORIZONTAL;
+        g.insets = new Insets(0, 0, 10, 0);
+        painelDados.add(comboFluidos,g);
         
         g.gridx = 0;
         g.gridy = 1;
         g.gridwidth = 3;
+        g.insets = new Insets(0, 0, 0, 0);
+        g.fill = GridBagConstraints.HORIZONTAL;
+        painelDados.add(painelEntrada,g);
+        
+        g.gridx = 0;
+        g.gridy = 2;
+        g.gridwidth = 3;
         g.fill = GridBagConstraints.HORIZONTAL;
         painelDados.add(painelSaida,g);
         
-        g.gridx = 2;
-        g.gridy = 2;
-        g.gridwidth = 1;
+        g.gridx = 0;
+        g.gridy = 3;
+        g.gridwidth = 3;
         g.fill = GridBagConstraints.HORIZONTAL;
         painelDados.add(btnCalcular,g);
      
