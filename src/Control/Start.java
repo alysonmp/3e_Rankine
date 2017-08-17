@@ -12,6 +12,8 @@ import Control.Ciclo2.ControlRegenerador;
 import Control.Ciclo2.ControlSF;
 import Control.Ciclo2.ControlTurbina;
 import Control.Conversao.ControlConverte;
+import View.ViewSaida;
+
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
@@ -283,17 +285,18 @@ public class Start {
         double DPhreg = regeff.getDPh();
         double DPcreg = regeff.getDPc();
         
+        ViewSaida saida = new ViewSaida();
         
-        ctrlPrincipal.getViewPrincipal().getTxtWt().setText(""+round(Wt, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtWb().setText(""+round(Wb, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtWn().setText(""+round(Wn, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtQevp().setText(""+round(Qevp, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtQcon().setText(""+round(Qcon, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtQreg().setText(""+round(Qreg, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtAt().setText(""+round(AT, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtATevp().setText(""+round(ATevp, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtATcon().setText(""+round(ATcon, 3));
-        ctrlPrincipal.getViewPrincipal().getTxtATreg().setText(""+round(ATreg, 3));
+        saida.getTxtWt().setText(""+round(Wt, 3));
+        saida.getTxtWb().setText(""+round(Wb, 3));
+        saida.getTxtWn().setText(""+round(Wn, 3));
+        saida.getTxtQevp().setText(""+round(Qevp, 3));
+        saida.getTxtQcon().setText(""+round(Qcon, 3));
+        saida.getTxtQreg().setText(""+round(Qreg, 3));
+        saida.getTxtAt().setText(""+round(AT, 3));
+        saida.getTxtATevp().setText(""+round(ATevp, 3));
+        saida.getTxtATcon().setText(""+round(ATcon, 3));
+        saida.getTxtATreg().setText(""+round(ATreg, 3));
     }   
     
     public double round(double value, int places) {
