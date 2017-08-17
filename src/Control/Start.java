@@ -249,7 +249,6 @@ public class Start {
         double UASEN = areas.getUASEN();
         double UALAT = areas.getUALAT();
         
-        double AT = Acon+Aevp+Areg;
         double ecg = ec*100;
         
         ControlEvpeff evpeff = new ControlEvpeff(P1, P6, T1, T6, ii, SUP, Hlat, Hsen, Hsup, compressor, m, mf, T1s, Tf, Tfout, Pf, FON, PINCH, UASUP, UALAT, UASEN, km, session);
@@ -286,6 +285,7 @@ public class Start {
         double DPcreg = regeff.getDPc();
         
         ViewSaida saida = new ViewSaida();
+        double AT = ATcon+ATevp+ATreg;
         
         saida.getTxtWt().setText(""+round(Wt, 3));
         saida.getTxtWb().setText(""+round(Wb, 3));
