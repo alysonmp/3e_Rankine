@@ -38,8 +38,8 @@ public class ControlMassa {
         
         m = calor.getQfon1()/EntEVP;
         double QTf = m * (H1 - H6);
-        //double QTfcor = QTf* 1.02;
-        ControlTSaida tSaidaF = new ControlTSaida(compressor, Tf, QTf, session);
+        double QTfcor = QTf* 1.02;
+        ControlTSaida tSaidaF = new ControlTSaida(compressor, Tf, QTfcor, session);
         Tfout = tSaidaF.getTfout();
         
         //Correcao da massa

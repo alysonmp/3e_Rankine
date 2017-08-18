@@ -34,7 +34,7 @@ public class ControlH_Dep {
         }else if(dif < 0.0001){
     //        
       //      HDV=-((T*(da_dT)-a)/(2*b*(2^0.5)))*log((Zv+B*(1-(2^0.5)))/(Zv+B*(1+(2^0.5))))+ (Zv-1)*R*T;
-                double aux = T;
+                /*double aux = T;
                 while(zeta.getZl() == zeta.getZv()){
                     if(aux-T > 3){
                         mensagem = "Não houve convergência no cálculo da entropia";
@@ -44,7 +44,7 @@ public class ControlH_Dep {
                     constantes = new ControlConstantes(T, P, ii, session);
                     zeta = new ControlZeta(constantes.getBeta(), constantes.getEps(), constantes.getDelta());
                     da_dT = (-0.457235*(Math.pow(constantes.getR(),2))*constantes.getTc()/constantes.getPc())*(1+constantes.getK0()*(1-(Math.pow(constantes.getTr(),0.5)))+constantes.getK1()*(1-constantes.getTr())*(0.7-constantes.getTr()))*((constantes.getK0()/(Math.pow(constantes.getTr(),0.5)))+(constantes.getK1()*(3.4-4*constantes.getTr())));
-                }
+                }*/
       
                 HDL=-((T*(da_dT)-constantes.geta())/(2*constantes.getb()*(Math.pow(2,0.5))))*Math.log((zeta.getZl()+constantes.getB()*(1-(Math.pow(2,0.5))))/(zeta.getZl()+constantes.getB()*(1+(Math.pow(2,0.5)))))+ (zeta.getZl()-1)*constantes.getR()*T;
                 HDV=-((T*(da_dT)-constantes.geta())/(2*constantes.getb()*(Math.pow(2,0.5))))*Math.log((zeta.getZv()+constantes.getB()*(1-(Math.pow(2,0.5))))/(zeta.getZv()+constantes.getB()*(1+(Math.pow(2,0.5)))))+ (zeta.getZv()-1)*constantes.getR()*T;
