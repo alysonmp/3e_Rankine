@@ -1,5 +1,6 @@
 package Control.Ciclo2;
 
+import Model.ModelComplexo;
 import javax.swing.JOptionPane;
 
 public class ControlCubica {
@@ -7,11 +8,39 @@ public class ControlCubica {
     private double x1;
     private double x2;
     private double x3;
+    private double x2i;
+    private double x3i;
     private int nRoots;
     private double D;
     private static final double TWO_PI = 2.0 * Math.PI;
     private static final double FOUR_PI = 4.0 * Math.PI;
 
+    private ModelComplexo complexo1, complexo2, complexo3;
+    
+    public ModelComplexo getComplexo1() {
+        return complexo1;
+    }
+
+    public void setComplexo1(ModelComplexo complexo1) {
+        this.complexo1 = complexo1;
+    }
+
+    public ModelComplexo getComplexo2() {
+        return complexo2;
+    }
+
+    public void setComplexo2(ModelComplexo complexo2) {
+        this.complexo2 = complexo2;
+    }
+
+    public ModelComplexo getComplexo3() {
+        return complexo3;
+    }
+
+    public void setComplexo3(ModelComplexo complexo3) {
+        this.complexo3 = complexo3;
+    }
+    
     public double getD(){
         return D;
     }
@@ -48,6 +77,111 @@ public class ControlCubica {
     }
     
     public void solve(double a,
+            double b,
+            double c,
+            double d) {
+        
+        double f, g, h, R, k, m2, n, n2, r, rc, theta, x2a, x2b, x2c, x2d, sign, dans;
+        
+        f = (((3*c)/a) - (((b*b)/(a*a))))/3;
+
+        g = ((2*((b*b*b)/(a*a*a))-(9*b*c/(a*a)) + ((27*(d/a)))))/27;
+
+        h = (((g*g)/4) + ((f*f*f)/27));
+
+        if (h > 0){
+            R = (-(g/2)+ (Math.sqrt(h)));
+
+            k=1;
+            if (R < 0) 
+                    k=-1; 
+            else 
+                    k=1;
+
+            m2 = (Math.pow((R*k),(0.33333333333333333333333333333333333333333333333333333333)));
+            m2 = m2*k;
+            k=1;
+            n = (-(g/2)- (Math.sqrt(h)));
+            if (n < 0) 
+                    k=-1; 
+            else 
+                    k=1;
+
+            n2 = (Math.pow((n*k),(0.33333333333333333333333333333333333333333333333333333333)));
+            n2 = n2*k;
+            k=1;
+            x1= ((m2 + n2) - (b/(3*a)));
+
+            x2=(-1*(m2 + n2)/2 - (b/(3*a)));// + " + i* " + 
+            x3=(-1*(m2 + n2)/2 - (b/(3*a)));// + " - i* " + 
+            
+            x2i = ((m2 - n2)/2)*Math.pow(3,.5);
+            x3i = ((m2 - n2)/2)*Math.pow(3,.5);
+            
+            complexo1 = new ModelComplexo(x1, 0);
+            complexo2 = new ModelComplexo(x2, x2i);
+            complexo3 = new ModelComplexo(x3, x3i);
+        }
+
+        if (h<=0){
+            r = ((Math.sqrt((g*g/4)-h)));
+            k=1;
+            if (r<0) 
+                k=-1;
+
+            rc = Math.pow((r*k),(0.33333333333333333333333333333333333333333333333333333333))*k;
+            k=1;
+            theta =Math.acos((-g/(2*r)));
+            x1= (2*(rc*Math.cos(theta/3))-(b/(3*a)));
+            x2a=rc*-1;
+            x2b= Math.cos(theta/3);
+            x2c= Math.sqrt(3)*(Math.sin(theta/3));
+            x2d= (b/3*a)*-1;
+            x2=(x2a*(x2b + x2c))-(b/(3*a));
+            x3=(x2a*(x2b - x2c))-(b/(3*a));
+
+            x1=x1*1E+14;
+            //x1=Math.round(x1);
+            x1=(x1/1E+14);
+            
+            x2=x2*1E+14;
+            //x2=Math.round(x2);
+            x2=(x2/1E+14);
+            
+            x3=x3*1E+14;
+            //x3=Math.round(x3);
+            x3=(x3/1E+14);
+            
+            complexo1 = new ModelComplexo(x1, 0);
+            complexo2 = new ModelComplexo(x2, 0);
+            complexo3 = new ModelComplexo(x3, 0);
+        }
+
+        if ((f+g+h)==0){
+            if (d<0){
+                sign=-1;
+            }else{
+                sign=1;
+            }
+
+            if (sign>0){
+                dans=Math.pow((d/a),(0.33333333333333333333333333333333333333333333333333333333));
+                dans=dans*-1;
+            }else{
+                d=d*-1;
+                dans=Math.pow((d/a),(0.33333333333333333333333333333333333333333333333333333333));
+            }
+            x1=dans; 
+            x2=dans;
+            x3=dans;
+            
+            complexo1 = new ModelComplexo(x1, 0);
+            complexo2 = new ModelComplexo(x2, 0);
+            complexo3 = new ModelComplexo(x3, 0);
+        }
+    }
+    
+    public void solve2(double a,
             double b,
             double c,
             double d) {

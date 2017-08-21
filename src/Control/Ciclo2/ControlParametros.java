@@ -23,7 +23,7 @@ public class ControlParametros {
     private String mensagem;
     
     public ControlParametros(double Tf, int ii, Session session){
-        Tevp1 = Tf-5;
+        Tevp1 = Tf-10;
         mensagem = "";
         
         Criteria cr = session.createCriteria(ModelCriticasKCSMat_Pc.class);

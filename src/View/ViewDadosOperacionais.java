@@ -50,13 +50,13 @@ public class ViewDadosOperacionais extends JPanel{
     private JLabel lblBeff = new JLabel("<html>&eta;<sub>B</sub></html>");
     private JLabel lblTcon = new JLabel("<html>T<sub>con</sub></html>");
     
-    private JTextField txtP1 = new JTextField("1229", 10);
-    private JTextField txtT1 = new JTextField("413.81");
-    private JTextField txtSUP = new JTextField("5");
+    private JTextField txtP1 = new JTextField("3000", 10);
+    private JTextField txtT1 = new JTextField("410.5163");
+    private JTextField txtSUP = new JTextField("0");
     private JTextField txtPINCH = new JTextField("5");
     private JTextField txtBeff = new JTextField("0.8");
     private JTextField txtTeff = new JTextField("0.8");
-    private JTextField txtTcon = new JTextField("0.8");
+    private JTextField txtTcon = new JTextField("313.15");
     
     //ENTRADA
     private JLabel labelFluidos = new JLabel("Fluído");

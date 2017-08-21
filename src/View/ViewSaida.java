@@ -40,12 +40,12 @@ public class ViewSaida extends JFrame{
 	
 	public ViewSaida() {
 		
-		painelSaida = new JPanel(new GridBagLayout());
-		painelSaida.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(1, Color.lightGray, Color.lightGray), "Saída", 1, 2, new Font("Times New Roman", 1, 12), Color.darkGray));
+        painelSaida = new JPanel(new GridBagLayout());
+        painelSaida.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(1, Color.lightGray, Color.lightGray), "Saída", 1, 2, new Font("Times New Roman", 1, 12), Color.darkGray));
+
+        GridBagConstraints g = new GridBagConstraints();
 		
-		GridBagConstraints g = new GridBagConstraints();
-		
-		//PAINEL SAIDA
+        //PAINEL SAIDA
         g.anchor = GridBagConstraints.LINE_START;
         g.gridx = 0;
         g.gridy = 0;
@@ -150,7 +150,7 @@ public class ViewSaida extends JFrame{
         painelSaida.add(txtATreg,g);
 		
         this.add(painelSaida);
-        this.setBounds(200, 200, 200, 200);
+        this.setBounds(200, 200, 300, 250);
         this.setTitle("Dados de Saída");
         this.setVisible(true);
         this.setResizable(false);

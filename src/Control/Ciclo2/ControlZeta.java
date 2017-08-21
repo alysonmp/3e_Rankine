@@ -6,6 +6,7 @@
 package Control.Ciclo2;
 
 import Control.Ciclo2.ControlCubica;
+import Model.ModelComplexo;
 
 /**
  *
@@ -17,20 +18,25 @@ public class ControlZeta {
     private double Zl, Zv, Z;
     private double ter1, ter2, ter3, ter4, Z1m, Z2m;
 
-    public ControlZeta(double beta, double eps, double delta) {          
+    public ControlZeta(double A, double B, double C) {
+
         ter1 = 1;
-        ter2 = beta;
-        ter3 = eps;
-        ter4 = delta;
-        
+        ter2 = A;
+        ter3 = B;
+        ter4 = C;
+
         cubica = new ControlCubica();
-        cubica.solve(ter1,ter2,ter3,ter4);
+        cubica.solve(ter1, ter2, ter3, ter4);
+
+        ModelComplexo complexo1 = cubica.getComplexo1();
+        ModelComplexo complexo2 = cubica.getComplexo2();
+        ModelComplexo complexo3 = cubica.getComplexo3();
+            
+        double x1 = complexo1.getReal();
+        double x2 = complexo2.getReal();
+        double x3 = complexo3.getReal();
         
-        double x1 = cubica.getX1();
-        double x2 = cubica.getX2();
-        double x3 = cubica.getX3();
-        
-        if (!Double.isNaN(x1) && !Double.isNaN(x2) && !Double.isNaN(x3)) {
+        if (complexo1.getImaginario() == 0 && complexo2.getImaginario() == 0 && complexo3.getImaginario() == 0) {
             if(x1 > x2 && x1 > x3){
                 Z1m = x1;
             }else if(x2 > x3){
@@ -47,28 +53,42 @@ public class ControlZeta {
                 Z2m = x3;
             }
         }else{
-            if((!Double.isNaN(x1) && Double.isNaN(x2) && Double.isNaN(x3)) || (!Double.isNaN(x1) && !Double.isNaN(x2) && Double.isNaN(x3) && x1 > x2) || (x1 > x2 && x1 > x3 && !Double.isNaN(x1))){
+            if(x1 > x2 && x1 > x3 && complexo1.getImaginario() == 0){
                 Z1m = x1;
-            }else if((!Double.isNaN(x2) && Double.isNaN(x3)) || (x2 > x3 && !Double.isNaN(x2))){
+            }else if(x2 > x3 && complexo2.getImaginario() == 0){
                 Z1m = x2;
-            }else if(!Double.isNaN(x3)){
+            }else if(complexo3.getImaginario() == 0){
                 Z1m = x3;
             }else{
-                Z1m = 0;
+                if(x1 > x2 && x1 > x3){
+                    Z1m = complexo1.abs();
+                }else if(x2 > x3){
+                    Z1m = complexo2.abs();
+                }else{
+                    Z1m = complexo3.abs();
+                }
+                
             }
             
-            if((!Double.isNaN(x1) && Double.isNaN(x2) && Double.isNaN(x3)) || (!Double.isNaN(x1) && !Double.isNaN(x2) && Double.isNaN(x3) && x1 < x2) || (x1 < x2 && x1 < x3 && !Double.isNaN(x1))){
+            if(x1 < x2 && x1 < x3 && complexo1.getImaginario() == 0){
                 Z2m = x1;
-            }else if((!Double.isNaN(x2) && Double.isNaN(x3)) || (x2 < x3 && !Double.isNaN(x2))){
+            }else if(x2 < x3 && complexo2.getImaginario() == 0){
                 Z2m = x2;
-            }else if(!Double.isNaN(x3)){
+            }else if(complexo3.getImaginario() == 0){
                 Z2m = x3;
             }else{
-                Z2m = 0;
+                if(x1 < x2 && x1 < x3){
+                    Z2m = complexo1.abs();
+                }else if(x2 < x3){
+                    Z2m = complexo2.abs();
+                }else{
+                    Z2m = complexo3.abs();
+                }
             }
+            
         }
-        Zl=Z2m;
-        Zv=Z1m;
+        Zl = Z2m;
+        Zv = Z1m;
     }
 
     public double getZl() {
