@@ -5,7 +5,6 @@
  */
 package Control.Ciclo2;
 
-import Model.ModelQfpsoKCSMat;
 import Model.ModelQfpsoRankineMat;
 import java.util.List;
 import org.hibernate.Criteria;

@@ -13,7 +13,6 @@ import Control.Ciclo2.ControlSF;
 import Control.Ciclo2.ControlTurbina;
 import Control.Conversao.ControlConverte;
 import View.ViewSaida;
-import javafx.scene.transform.TransformChangedEvent;
 
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -86,8 +85,8 @@ public class Start {
         double Tcri = parametros.getTcri();
         double Pcri = parametros.getPcri();
 
-        if(!ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtTcon().getText().toString().equals("")){
-        		Tconop = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtTcon().getText().toString());
+        if(!ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtTcon().getText().equals("")){
+            Tconop = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtTcon().getText());
         }
         
         double G = 1;
