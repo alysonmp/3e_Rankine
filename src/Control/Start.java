@@ -57,15 +57,19 @@ public class Start {
             P1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtP1().getText());
         }
         
-        double T1;
-        if(!ctrlPrincipal.getViewPrincipal().getDadosOp().getComboT1().getSelectedItem().toString().equals("K")){
-            T1 = converte.converte(ctrlPrincipal.getViewPrincipal().getDadosOp().getComboT1().getSelectedItem().toString(), "K", Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtT1().getText()));
-        }else{
-            T1 = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtT1().getText());
-        }
-        
         double PINCH = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtPINCH().getText());   
         double SUP = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getDadosOp().getTxtSUP().getText());
+        
+        double T1;
+        if(!ctrlPrincipal.getViewPrincipal().getDadosOp().getComboT1().getSelectedItem().toString().equals("K")){
+            T1 = converte.converte(ctrlPrincipal.getViewPrincipal().getDadosOp().getComboT1().getSelectedItem().toString(), "K", ctrlPrincipal.getViewPrincipal().getDadosOp().getT1());
+        }else{
+            T1 = ctrlPrincipal.getViewPrincipal().getDadosOp().getT1();
+        }
+        
+        if(ctrlPrincipal.getViewPrincipal().getDadosOp().getFlag() == 1) {
+        		T1 += SUP;
+        }
         
         int flu = ctrlPrincipal.getViewPrincipal().getDadosOp().getFlu();
         int FON = ctrlPrincipal.getViewPrincipal().getFonteCalor().getFON();
@@ -271,7 +275,7 @@ public class Start {
         k = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldCondK().getText());
         core = Integer.parseInt(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldCondCore().getText());
         
-        ControlConeff coneff = new ControlConeff(P4, P3, m, mH2O, ii, Ten, Ten1, Ts, T3, T4, UACONs, UACONl, Pen, k, core, session);
+        ControlConeff coneff = new ControlConeff(P4, P3, m, mH2O, ii, Ten, Ten1, Ts, T3, T4, UACONs, UACONl, Pen, k, core, SUP, session);
         double ATcon = coneff.getAT();
         double Ahocon = coneff.getAho();
         double Acocon = coneff.getAco();

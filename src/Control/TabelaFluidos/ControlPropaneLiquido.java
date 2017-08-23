@@ -81,28 +81,28 @@ public class ControlPropaneLiquido {
         temperatura += 1;
         do{
             temperatura -= 1;
-            SQLQuery consulta = this.session.createSQLQuery("select * from Propane where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
+            SQLQuery consulta = this.session.createSQLQuery("select * from Propane_liquido where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelPropaneLiquido.class));//Sem isso aqui impossível de retornar
             List<ModelPropaneLiquido> Propanes = consulta.list(); 
             if(!Propanes.isEmpty())
                 Propane1 = Propanes.get(0);
 
-            consulta = this.session.createSQLQuery("select * from Propane where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from Propane_liquido where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelPropaneLiquido.class));//Sem isso aqui impossível de retornar
             Propanes = consulta.list(); 
             if(!Propanes.isEmpty())
                 Propane2 = Propanes.get(0);
 
-            consulta = this.session.createSQLQuery("select * from Propane where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
+            consulta = this.session.createSQLQuery("select * from Propane_liquido where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelPropaneLiquido.class));//Sem isso aqui impossível de retornar
             Propanes = consulta.list(); 
             if(!Propanes.isEmpty())
                 Propane3 = Propanes.get(0);
 
-            consulta = this.session.createSQLQuery("select * from Propane where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from Propane_liquido where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelPropaneLiquido.class));//Sem isso aqui impossível de retornar
             Propanes = consulta.list(); 

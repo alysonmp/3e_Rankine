@@ -81,28 +81,28 @@ public class ControlR114Liquido {
         temperatura += 1;
         do{
             temperatura -= 1;
-            SQLQuery consulta = this.session.createSQLQuery("select * from R114 where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
+            SQLQuery consulta = this.session.createSQLQuery("select * from R114_liquido where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelR114Liquido.class));//Sem isso aqui impossível de retornar
             List<ModelR114Liquido> R114s = consulta.list(); 
             if(!R114s.isEmpty())
                 R1141 = R114s.get(0);
 
-            consulta = this.session.createSQLQuery("select * from R114 where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from R114_liquido where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelR114Liquido.class));//Sem isso aqui impossível de retornar
             R114s = consulta.list();
             if(!R114s.isEmpty())
                 R1142 = R114s.get(0);
 
-            consulta = this.session.createSQLQuery("select * from R114 where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
+            consulta = this.session.createSQLQuery("select * from R114_liquido where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelR114Liquido.class));//Sem isso aqui impossível de retornar
             R114s = consulta.list();
             if(!R114s.isEmpty())
                 R1143 = R114s.get(0);
 
-            consulta = this.session.createSQLQuery("select * from R114 where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from R114_liquido where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelR114Liquido.class));//Sem isso aqui impossível de retornar
             R114s = consulta.list();

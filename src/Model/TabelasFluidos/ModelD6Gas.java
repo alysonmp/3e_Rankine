@@ -48,7 +48,7 @@ public class ModelD6Gas implements Serializable{
     public ModelD6Gas() {
     }
 
-    public ModelD6Gas(double pressao, double temperatura, double kv, double Cpv, double Prv, double Muv, double Vcv) {
+    public ModelD6Gas(double pressao, double temperatura, double Cpv, double Prv, double kv, double Muv, double Vcv) {
         this.pressao = pressao;
         this.temperatura = temperatura;
         this.kv = kv;

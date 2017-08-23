@@ -81,28 +81,28 @@ public class ControlMD4MLiquido {
         temperatura += 1;
         do{
             temperatura -= 1;
-            SQLQuery consulta = this.session.createSQLQuery("select * from MD4M where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
+            SQLQuery consulta = this.session.createSQLQuery("select * from MD4M_liquido where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMD4MLiquido.class));//Sem isso aqui impossível de retornar
             List<ModelMD4MLiquido> MD4Ms = consulta.list(); 
             if(!MD4Ms.isEmpty())
                 MD4M1 = MD4Ms.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MD4M where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from MD4M_liquido where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMD4MLiquido.class));//Sem isso aqui impossível de retornar
             MD4Ms = consulta.list(); 
             if(!MD4Ms.isEmpty())
                 MD4M2 = MD4Ms.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MD4M where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
+            consulta = this.session.createSQLQuery("select * from MD4M_liquido where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMD4MLiquido.class));//Sem isso aqui impossível de retornar
             MD4Ms = consulta.list();
             if(!MD4Ms.isEmpty())
                 MD4M3 = MD4Ms.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MD4M where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from MD4M_liquido where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMD4MLiquido.class));//Sem isso aqui impossível de retornar
             MD4Ms = consulta.list(); 

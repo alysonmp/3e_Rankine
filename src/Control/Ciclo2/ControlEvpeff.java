@@ -72,7 +72,28 @@ public class ControlEvpeff {
         
         constantes = new ControlConstantes(T1s, P1, ii, session);
         zeta = new ControlZeta(constantes.getBeta(), constantes.getEps(), constantes.getDelta());
-        double Zls = zeta.getZl();
+        
+        if(zeta.getZv() == 0) {
+			if(zeta.getComplexo1().getReal() > zeta.getComplexo2().getReal() && zeta.getComplexo1().getReal() > zeta.getComplexo3().getReal()){
+	            zeta.setZv(zeta.getComplexo1().abs());
+	        }else if(zeta.getComplexo2().getReal() > zeta.getComplexo3().getReal()){
+	        		zeta.setZv(zeta.getComplexo2().abs());
+	        }else{
+	        		zeta.setZv(zeta.getComplexo3().abs());
+	        }
+		}
+		
+		if(zeta.getZl() == 0) { 
+			if(zeta.getComplexo1().getReal() < zeta.getComplexo2().getReal() && zeta.getComplexo1().getReal() < zeta.getComplexo3().getReal()){
+	            zeta.setZl(zeta.getComplexo1().abs());
+	        }else if(zeta.getComplexo2().getReal() < zeta.getComplexo3().getReal()){
+	        		zeta.setZl(zeta.getComplexo2().abs());
+	        }else{
+	        		zeta.setZl(zeta.getComplexo3().abs());
+	        }
+		}
+		
+		double Zls = zeta.getZl();
         double Zvs = zeta.getZv();
         
         double D1sl = 1/(((Zls*constantes.getR()*T1s)/P1)/pm.getValor()); //%%kg/m3 
@@ -410,139 +431,269 @@ public class ControlEvpeff {
         double Afrh;
         double Afrc;
         
+        int cont = 0;
+        
         while(erro1 > 0 || erro2 > 0){
-            Rehsup = (Ghsup*Dh1)/((MUf+MUf1)/2);
-            Rehlat = (Ghlat*Dh1)/((MUf2+MUf1)/2);
-            Rehsen = (Ghsen*Dh1)/((MUf2+MUfout)/2);
-            fhsup = (9.6243*Math.pow(Rehsup,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehsup,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
-            fhlat = (9.6243*Math.pow(Rehlat,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehlat,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
-            fhsen = (9.6243*Math.pow(Rehsen,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehsen,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
-            jhsup = (0.6522*Math.pow(Rehsup,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehsup,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
-            jhlat = (0.6522*Math.pow(Rehlat,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehlat,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
-            jhsen = (0.6522*Math.pow(Rehsen,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehsen,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
-            //% Lhsup= (Dh1*(Prf^(2/3))*Nhsup)/(4*jhsup);
-            //% Lhlat= (Dh1*(Prf1^(2/3))*Nhlat)/(4*jhlat);
-            //% Lhsen= (Dh1*(Prf2^(2/3))*Nhsen)/(4*jhsen);
-
-            Recsup = (Gcsup*Dh2)/((MU1+MU1s)/2);
-            Reclat = (Gclat*Dh2)/((MU1s+MU1sl)/2);
-            Recsen = (Gcsen*Dh2)/((MU1sl+MU6)/2);
-            fcsup = (9.6243*Math.pow(Recsup,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Recsup,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
-            fclat = (9.6243*Math.pow(Reclat,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Reclat,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
-            fcsen = (9.6243*Math.pow(Recsen,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Recsen,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
-            jcsup = (0.6522*Math.pow(Recsup,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Recsup,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
-            jclat = (0.6522*Math.pow(Reclat,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Reclat,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
-            jcsen = (0.6522*Math.pow(Recsen,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Recsen,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
-            //% Lcsup= (Dh2*(Pr1^(2/3))*Ncsup)/(4*jcsup);
-            //% Lclat= (Dh2*(Pr1s^(2/3))*Nclat)/(4*jclat);
-            //% Lcsen= (Dh2*(Pr1sl^(2/3))*Ncsen)/(4*jcsen);
-
-            //%%%%%%%%%%%%%   (W/m2*K)   %%%%%%%%%%%%%%%%%%%%
-            hhsup = jhsup*Ghsup*((Cpf+Cpf1)/2)/Math.pow(Prf,(0.66666667)); //% Coeficiente de transferÍncia de calor lado quente
-            hhlat = jhlat*Ghlat*((Cpf2+Cpf1)/2)/Math.pow(Prf1,(0.66666667)); //% Coeficiente de transferÍncia de calor lado quente
-            hhsen = jhsen*Ghsen*((Cpf2+Cpfout)/2)/Math.pow(Prf2,(0.66666667)); //% Coeficiente de transferÍncia de calor lado quente
-
-            hcsup = jcsup*Gcsup*((Cp1+Cp1s)/2)/Math.pow(Pr1,(0.66666667)); //% Coeficiente de transferÍncia de calor lado frio
-            hclat = jclat*Gclat*((Cp1s+Cp1s)/2)/Math.pow(Pr1s,(0.66666667)); //% Coeficiente de transferÍncia de calor lado frio
-            hcsen = jcsen*Gcsen*((Cp6+Cp1s)/2)/Math.pow(Pr1sl,(0.66666667)); //% Coeficiente de transferÍncia de calor lado frio
-
-            //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-            //% Fatores para c·lclulo da eficiÍncia:
-            m1sup = Math.pow((((2*hhsup)/(km*(t1)))*(1+(t1/l1))),0.5);
-            m1lat = Math.pow((((2*hhlat)/(km*(t1)))*(1+(t1/l1))),0.5);
-            m1sen = Math.pow((((2*hhsen)/(km*(t1)))*(1+(t1/l1))),0.5);
-            lh = 0.5*(b1-t1);
-
-            m2sup = Math.pow((((2*hcsup)/(km*(t2)))*(1+(t2/l2))),0.5);
-            m2lat = Math.pow((((2*hclat)/(km*(t2)))*(1+(t2/l2))),0.5);
-            m2sen = Math.pow((((2*hcsen)/(km*(t2)))*(1+(t2/l2))),0.5);
-            lc = 0.5*(b2-t2);
-
-            e1sup = (Math.tanh(m1sup*lh))/(m1sup*lh);  //% EficiÍncia da aleta lado quente
-            e1lat = (Math.tanh(m1lat*lh))/(m1lat*lh);  //% EficiÍncia da aleta lado quente
-            e1sen = (Math.tanh(m1sen*lh))/(m1sen*lh);  //% EficiÍncia da aleta lado quente
-
-            e2sup = (Math.tanh(m2sup*lc))/(m2sup*lc); //% EficiÍncia da aleta lado frio
-            e2lat = (Math.tanh(m2lat*lc))/(m2lat*lc);  //% EficiÍncia da aleta lado frio
-            e2sen = (Math.tanh(m2sen*lc))/(m2sen*lc);  //% EficiÍncia da aleta lado frio
-
-
-            //%The overall surface efficiencies with Af /A values from Fig. E9.1B or input are
-
-            e1gsup = 1-(1-e1sup)*por1;  //% EficiÍncia global da SuperfÌcie lado Quente
-            e1glat = 1-(1-e1lat)*por1;  //% EficiÍncia global da SuperfÌcie lado Quente
-            e1gsen = 1-(1-e1sen)*por1;  //% EficiÍncia global da SuperfÌcie lado Quente
-
-            e2gsup = 1-(1-e2sup)*por2;  //% EficiÍncia global da SuperfÌcie lado Frio
-            e2glat = 1-(1-e2lat)*por2;  //% EficiÍncia global da SuperfÌcie lado frio
-            e2gsen = 1-(1-e2sen)*por2;
-
-
-            //%coeficiente de transferencia de calor (W/m2*K)
-            iUsup = (1/(e1gsup*hhsup))+(AA/(e2gsup*hcsup));
-            Ugsup = 1/iUsup;
-            iUlat = (1/(e1glat*hhlat))+(AA/(e2glat*hclat));
-            Uglat = 1/iUlat;
-            iUsen = (1/(e1gsen*hhsen))+(AA/(e2gsen*hcsen));
-            Ugsen = 1/iUsen;
-
-            //%Area de superficie / %Area de fluxo livre  / Comprimento
-            Ahsup = NTUsup*Csupmin/(Ugsup/1000);
-            Ahlat = NTUlat*Clatmin/(Uglat/1000);
-            Ahsen = NTUsen*Csenmin/(Ugsen/1000);
-            Ahosup = mf/Ghsup;
-            Aholat = mf/Ghlat;
-            Ahosen = mf/Ghsen;
-            double[] AhoList = {Ahosup,Aholat,Ahosen};
-            double max = Arrays.stream(AhoList).max().getAsDouble();
-            AT = Ahsup+Ahsen+Ahlat;
-
-            Acsup = Ahsup/AA;
-            Aclat = Ahlat/AA;
-            Acsen = Ahsen/AA;
-            Acosup = (m*pm.getValor())/Gcsup;
-            Acolat = (m*pm.getValor())/Gclat;
-            Acosen = (m*pm.getValor())/Gcsen;
-            double[] AcoList = {Acosup,Acolat,Acosen};
-
-            Aho = Arrays.stream(AhoList).max().getAsDouble();
-            Aco = Arrays.stream(AcoList).max().getAsDouble();
-
-            Lcsup = (Dh2*Acsup)/(4*Aco);
-            Lclat = (Dh2*Aclat)/(4*Aco);
-            Lcsen = (Dh2*Ahsen)/(4*Aco);
-            Lc = Lcsup+Lclat+Lcsen;
-            Lhsup = (Dh1*Ahsup)/(4*Aho);
-            Lhlat = (Dh1*Ahlat)/(4*Aho);
-            Lhsen = (Dh1*Ahsen)/(4*Aho);
-            Lh = Lhsup+Lhlat+Lhsen;
-
-            Ghsup = mf/Aho;
-            Ghlat = mf/Aho;
-            Ghsen = mf/Aho;
-            Gcsup = (m*pm.getValor())/Aco;
-            Gclat = (m*pm.getValor())/Aco;
-            Gcsen = (m*pm.getValor())/Aco;
-
-            DPhsup = (2*Math.pow(Ghsup,2)*Lhsup*fhsup)/(Dh1*((Df1+Df)/2));
-            DPhlat = (2*Math.pow(Ghlat,2)*Lhlat*fhlat)/(Dh1*((Df1+Df2)/2));
-            DPhsen = (2*Math.pow(Ghsen,2)*Lhsen*fhsen)/(Dh1*((Dfout+Df2)/2));
-            DPh = DPhsup+DPhlat+DPhsen;
-            erro1 = DPh-DPf;
-
-            DPcsup = (2*Math.pow(Gcsup,2)*Lcsup*fcsup)/(Dh2*((D1+D1sv)/2));
-            DPclat = (2*Math.pow(Gclat,2)*Lclat*fclat)/(Dh2*((D1sv+D1sl)/2));
-            DPcsen = (2*Math.pow(Gcsen,2)*Lcsen*fcsen)/(Dh2*((D1sl+D6)/2));
-            DPc=DPcsup+DPclat+DPcsen;
-            erro2=DPc-DP6;
-
-            Afrh = Aho/cf1;
-            Afrc = Aco/cf2;
-
-            L3=Afrh/Lc;
-            Vhx=L3*Lc*Lh;
-            //% L3c=Afrc/Lh;
+	        	cont++;
+	    		if(cont == 300) {
+	    			break;
+	    		}
+        	
+        	
+        		if(SUP != 0) {
+	            Rehsup = (Ghsup*Dh1)/((MUf+MUf1)/2);
+	            Rehlat = (Ghlat*Dh1)/((MUf2+MUf1)/2);
+	            Rehsen = (Ghsen*Dh1)/((MUf2+MUfout)/2);
+	            fhsup = (9.6243*Math.pow(Rehsup,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehsup,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
+	            fhlat = (9.6243*Math.pow(Rehlat,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehlat,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
+	            fhsen = (9.6243*Math.pow(Rehsen,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehsen,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
+	            jhsup = (0.6522*Math.pow(Rehsup,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehsup,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
+	            jhlat = (0.6522*Math.pow(Rehlat,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehlat,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
+	            jhsen = (0.6522*Math.pow(Rehsen,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehsen,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
+	            //% Lhsup= (Dh1*(Prf^(2/3))*Nhsup)/(4*jhsup);
+	            //% Lhlat= (Dh1*(Prf1^(2/3))*Nhlat)/(4*jhlat);
+	            //% Lhsen= (Dh1*(Prf2^(2/3))*Nhsen)/(4*jhsen);
+	
+	            Recsup = (Gcsup*Dh2)/((MU1+MU1s)/2);
+	            Reclat = (Gclat*Dh2)/((MU1s+MU1sl)/2);
+	            Recsen = (Gcsen*Dh2)/((MU1sl+MU6)/2);
+	            fcsup = (9.6243*Math.pow(Recsup,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Recsup,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
+	            fclat = (9.6243*Math.pow(Reclat,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Reclat,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
+	            fcsen = (9.6243*Math.pow(Recsen,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Recsen,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
+	            jcsup = (0.6522*Math.pow(Recsup,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Recsup,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
+	            jclat = (0.6522*Math.pow(Reclat,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Reclat,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
+	            jcsen = (0.6522*Math.pow(Recsen,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Recsen,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
+	            //% Lcsup= (Dh2*(Pr1^(2/3))*Ncsup)/(4*jcsup);
+	            //% Lclat= (Dh2*(Pr1s^(2/3))*Nclat)/(4*jclat);
+	            //% Lcsen= (Dh2*(Pr1sl^(2/3))*Ncsen)/(4*jcsen);
+	
+	            //%%%%%%%%%%%%%   (W/m2*K)   %%%%%%%%%%%%%%%%%%%%
+	            hhsup = jhsup*Ghsup*((Cpf+Cpf1)/2)/Math.pow(Prf,(0.66666667)); //% Coeficiente de transferÍncia de calor lado quente
+	            hhlat = jhlat*Ghlat*((Cpf2+Cpf1)/2)/Math.pow(Prf1,(0.66666667)); //% Coeficiente de transferÍncia de calor lado quente
+	            hhsen = jhsen*Ghsen*((Cpf2+Cpfout)/2)/Math.pow(Prf2,(0.66666667)); //% Coeficiente de transferÍncia de calor lado quente
+	
+	            hcsup = jcsup*Gcsup*((Cp1+Cp1s)/2)/Math.pow(Pr1,(0.66666667)); //% Coeficiente de transferÍncia de calor lado frio
+	            hclat = jclat*Gclat*((Cp1s+Cp1s)/2)/Math.pow(Pr1s,(0.66666667)); //% Coeficiente de transferÍncia de calor lado frio
+	            hcsen = jcsen*Gcsen*((Cp6+Cp1s)/2)/Math.pow(Pr1sl,(0.66666667)); //% Coeficiente de transferÍncia de calor lado frio
+	
+	            //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	            //% Fatores para c·lclulo da eficiÍncia:
+	            m1sup = Math.pow((((2*hhsup)/(km*(t1)))*(1+(t1/l1))),0.5);
+	            m1lat = Math.pow((((2*hhlat)/(km*(t1)))*(1+(t1/l1))),0.5);
+	            m1sen = Math.pow((((2*hhsen)/(km*(t1)))*(1+(t1/l1))),0.5);
+	            lh = 0.5*(b1-t1);
+	
+	            m2sup = Math.pow((((2*hcsup)/(km*(t2)))*(1+(t2/l2))),0.5);
+	            m2lat = Math.pow((((2*hclat)/(km*(t2)))*(1+(t2/l2))),0.5);
+	            m2sen = Math.pow((((2*hcsen)/(km*(t2)))*(1+(t2/l2))),0.5);
+	            lc = 0.5*(b2-t2);
+	
+	            e1sup = (Math.tanh(m1sup*lh))/(m1sup*lh);  //% EficiÍncia da aleta lado quente
+	            e1lat = (Math.tanh(m1lat*lh))/(m1lat*lh);  //% EficiÍncia da aleta lado quente
+	            e1sen = (Math.tanh(m1sen*lh))/(m1sen*lh);  //% EficiÍncia da aleta lado quente
+	
+	            e2sup = (Math.tanh(m2sup*lc))/(m2sup*lc); //% EficiÍncia da aleta lado frio
+	            e2lat = (Math.tanh(m2lat*lc))/(m2lat*lc);  //% EficiÍncia da aleta lado frio
+	            e2sen = (Math.tanh(m2sen*lc))/(m2sen*lc);  //% EficiÍncia da aleta lado frio
+	
+	
+	            //%The overall surface efficiencies with Af /A values from Fig. E9.1B or input are
+	
+	            e1gsup = 1-(1-e1sup)*por1;  //% EficiÍncia global da SuperfÌcie lado Quente
+	            e1glat = 1-(1-e1lat)*por1;  //% EficiÍncia global da SuperfÌcie lado Quente
+	            e1gsen = 1-(1-e1sen)*por1;  //% EficiÍncia global da SuperfÌcie lado Quente
+	
+	            e2gsup = 1-(1-e2sup)*por2;  //% EficiÍncia global da SuperfÌcie lado Frio
+	            e2glat = 1-(1-e2lat)*por2;  //% EficiÍncia global da SuperfÌcie lado frio
+	            e2gsen = 1-(1-e2sen)*por2;
+	
+	
+	            //%coeficiente de transferencia de calor (W/m2*K)
+	            iUsup = (1/(e1gsup*hhsup))+(AA/(e2gsup*hcsup));
+	            Ugsup = 1/iUsup;
+	            iUlat = (1/(e1glat*hhlat))+(AA/(e2glat*hclat));
+	            Uglat = 1/iUlat;
+	            iUsen = (1/(e1gsen*hhsen))+(AA/(e2gsen*hcsen));
+	            Ugsen = 1/iUsen;
+	
+	            //%Area de superficie / %Area de fluxo livre  / Comprimento
+	            Ahsup = NTUsup*Csupmin/(Ugsup/1000);
+	            Ahlat = NTUlat*Clatmin/(Uglat/1000);
+	            Ahsen = NTUsen*Csenmin/(Ugsen/1000);
+	            Ahosup = mf/Ghsup;
+	            Aholat = mf/Ghlat;
+	            Ahosen = mf/Ghsen;
+	            double[] AhoList = {Ahosup,Aholat,Ahosen};
+	            double max = Arrays.stream(AhoList).max().getAsDouble();
+	            AT = Ahsup+Ahsen+Ahlat;
+	
+	            Acsup = Ahsup/AA;
+	            Aclat = Ahlat/AA;
+	            Acsen = Ahsen/AA;
+	            Acosup = (m*pm.getValor())/Gcsup;
+	            Acolat = (m*pm.getValor())/Gclat;
+	            Acosen = (m*pm.getValor())/Gcsen;
+	            double[] AcoList = {Acosup,Acolat,Acosen};
+	
+	            Aho = Arrays.stream(AhoList).max().getAsDouble();
+	            Aco = Arrays.stream(AcoList).max().getAsDouble();
+	
+	            Lcsup = (Dh2*Acsup)/(4*Aco);
+	            Lclat = (Dh2*Aclat)/(4*Aco);
+	            Lcsen = (Dh2*Ahsen)/(4*Aco);
+	            Lc = Lcsup+Lclat+Lcsen;
+	            Lhsup = (Dh1*Ahsup)/(4*Aho);
+	            Lhlat = (Dh1*Ahlat)/(4*Aho);
+	            Lhsen = (Dh1*Ahsen)/(4*Aho);
+	            Lh = Lhsup+Lhlat+Lhsen;
+	
+	            Ghsup = mf/Aho;
+	            Ghlat = mf/Aho;
+	            Ghsen = mf/Aho;
+	            Gcsup = (m*pm.getValor())/Aco;
+	            Gclat = (m*pm.getValor())/Aco;
+	            Gcsen = (m*pm.getValor())/Aco;
+	
+	            DPhsup = (2*Math.pow(Ghsup,2)*Lhsup*fhsup)/(Dh1*((Df1+Df)/2));
+	            DPhlat = (2*Math.pow(Ghlat,2)*Lhlat*fhlat)/(Dh1*((Df1+Df2)/2));
+	            DPhsen = (2*Math.pow(Ghsen,2)*Lhsen*fhsen)/(Dh1*((Dfout+Df2)/2));
+	            DPh = DPhsup+DPhlat+DPhsen;
+	            erro1 = DPh-DPf;
+	
+	            DPcsup = (2*Math.pow(Gcsup,2)*Lcsup*fcsup)/(Dh2*((D1+D1sv)/2));
+	            DPclat = (2*Math.pow(Gclat,2)*Lclat*fclat)/(Dh2*((D1sv+D1sl)/2));
+	            DPcsen = (2*Math.pow(Gcsen,2)*Lcsen*fcsen)/(Dh2*((D1sl+D6)/2));
+	            DPc=DPcsup+DPclat+DPcsen;
+	            erro2=DPc-DP6;
+	
+	            Afrh = Aho/cf1;
+	            Afrc = Aco/cf2;
+	
+	            L3=Afrh/Lc;
+	            Vhx=L3*Lc*Lh;
+	            //% L3c=Afrc/Lh;
+        		}else {
+    	            Rehlat = (Ghlat*Dh1)/((MUf2+MUf1)/2);
+    	            Rehsen = (Ghsen*Dh1)/((MUf2+MUfout)/2);
+    	            fhlat = (9.6243*Math.pow(Rehlat,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehlat,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
+    	            fhsen = (9.6243*Math.pow(Rehsen,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehsen,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
+    	            jhlat = (0.6522*Math.pow(Rehlat,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehlat,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
+    	            jhsen = (0.6522*Math.pow(Rehsen,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehsen,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
+    	            //% Lhsup= (Dh1*(Prf^(2/3))*Nhsup)/(4*jhsup);
+    	            //% Lhlat= (Dh1*(Prf1^(2/3))*Nhlat)/(4*jhlat);
+    	            //% Lhsen= (Dh1*(Prf2^(2/3))*Nhsen)/(4*jhsen);
+    	
+    	            Reclat = (Gclat*Dh2)/((MU1s+MU1sl)/2);
+    	            Recsen = (Gcsen*Dh2)/((MU1sl+MU6)/2);
+    	            fclat = (9.6243*Math.pow(Reclat,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Reclat,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
+    	            fcsen = (9.6243*Math.pow(Recsen,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Recsen,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
+    	            jclat = (0.6522*Math.pow(Reclat,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Reclat,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
+    	            jcsen = (0.6522*Math.pow(Recsen,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Recsen,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
+    	            //% Lcsup= (Dh2*(Pr1^(2/3))*Ncsup)/(4*jcsup);
+    	            //% Lclat= (Dh2*(Pr1s^(2/3))*Nclat)/(4*jclat);
+    	            //% Lcsen= (Dh2*(Pr1sl^(2/3))*Ncsen)/(4*jcsen);
+    	
+    	            //%%%%%%%%%%%%%   (W/m2*K)   %%%%%%%%%%%%%%%%%%%%
+    	            hhlat = jhlat*Ghlat*((Cpf2+Cpf1)/2)/Math.pow(Prf1,(0.66666667)); //% Coeficiente de transferÍncia de calor lado quente
+    	            hhsen = jhsen*Ghsen*((Cpf2+Cpfout)/2)/Math.pow(Prf2,(0.66666667)); //% Coeficiente de transferÍncia de calor lado quente
+    	
+    	            hclat = jclat*Gclat*((Cp1s+Cp1s)/2)/Math.pow(Pr1s,(0.66666667)); //% Coeficiente de transferÍncia de calor lado frio
+    	            hcsen = jcsen*Gcsen*((Cp6+Cp1s)/2)/Math.pow(Pr1sl,(0.66666667)); //% Coeficiente de transferÍncia de calor lado frio
+    	
+    	            //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    	
+    	            //% Fatores para c·lclulo da eficiÍncia:
+    	            m1lat = Math.pow((((2*hhlat)/(km*(t1)))*(1+(t1/l1))),0.5);
+    	            m1sen = Math.pow((((2*hhsen)/(km*(t1)))*(1+(t1/l1))),0.5);
+    	            lh = 0.5*(b1-t1);
+    	
+    	            m2lat = Math.pow((((2*hclat)/(km*(t2)))*(1+(t2/l2))),0.5);
+    	            m2sen = Math.pow((((2*hcsen)/(km*(t2)))*(1+(t2/l2))),0.5);
+    	            lc = 0.5*(b2-t2);
+    	
+    	            e1lat = (Math.tanh(m1lat*lh))/(m1lat*lh);  //% EficiÍncia da aleta lado quente
+    	            e1sen = (Math.tanh(m1sen*lh))/(m1sen*lh);  //% EficiÍncia da aleta lado quente
+    	
+    	            e2lat = (Math.tanh(m2lat*lc))/(m2lat*lc);  //% EficiÍncia da aleta lado frio
+    	            e2sen = (Math.tanh(m2sen*lc))/(m2sen*lc);  //% EficiÍncia da aleta lado frio
+    	
+    	
+    	            //%The overall surface efficiencies with Af /A values from Fig. E9.1B or input are
+    	
+    	            e1glat = 1-(1-e1lat)*por1;  //% EficiÍncia global da SuperfÌcie lado Quente
+    	            e1gsen = 1-(1-e1sen)*por1;  //% EficiÍncia global da SuperfÌcie lado Quente
+    	
+    	            e2glat = 1-(1-e2lat)*por2;  //% EficiÍncia global da SuperfÌcie lado frio
+    	            e2gsen = 1-(1-e2sen)*por2;
+    	
+    	
+    	            //%coeficiente de transferencia de calor (W/m2*K)
+    	            iUlat = (1/(e1glat*hhlat))+(AA/(e2glat*hclat));
+    	            Uglat = 1/iUlat;
+    	            iUsen = (1/(e1gsen*hhsen))+(AA/(e2gsen*hcsen));
+    	            Ugsen = 1/iUsen;
+    	
+    	            //%Area de superficie / %Area de fluxo livre  / Comprimento
+    	            Ahlat = NTUlat*Clatmin/(Uglat/1000);
+    	            Ahsen = NTUsen*Csenmin/(Ugsen/1000);
+    	            Aholat = mf/Ghlat;
+    	            Ahosen = mf/Ghsen;
+    	            
+    	            Ahosup = 0;
+    	            double[] AhoList = {Ahosup,Aholat,Ahosen};
+    	            double max = Arrays.stream(AhoList).max().getAsDouble();
+    	            Ahsup = 0;
+    	            AT = Ahsup+Ahsen+Ahlat;
+    	
+    	            Aclat = Ahlat/AA;
+    	            Acsen = Ahsen/AA;
+    	            Acolat = (m*pm.getValor())/Gclat;
+    	            Acosen = (m*pm.getValor())/Gcsen;
+    	            Acosup = 0;
+    	            double[] AcoList = {Acosup,Acolat,Acosen};
+    	
+    	            Aho = Arrays.stream(AhoList).max().getAsDouble();
+    	            Aco = Arrays.stream(AcoList).max().getAsDouble();
+    	
+    	            Lclat = (Dh2*Aclat)/(4*Aco);
+    	            Lcsen = (Dh2*Ahsen)/(4*Aco);
+    	            Lcsup = 0;
+    	            Lc = Lcsup+Lclat+Lcsen;
+    	            Lhlat = (Dh1*Ahlat)/(4*Aho);
+    	            Lhsen = (Dh1*Ahsen)/(4*Aho);
+    	            Lhsup = 0;
+    	            Lh = Lhsup+Lhlat+Lhsen;
+    	
+    	            Ghlat = mf/Aho;
+    	            Ghsen = mf/Aho;
+    	            Gclat = (m*pm.getValor())/Aco;
+    	            Gcsen = (m*pm.getValor())/Aco;
+    	
+    	            DPhlat = (2*Math.pow(Ghlat,2)*Lhlat*fhlat)/(Dh1*((Df1+Df2)/2));
+    	            DPhsen = (2*Math.pow(Ghsen,2)*Lhsen*fhsen)/(Dh1*((Dfout+Df2)/2));
+    	            
+    	            DPhsup = 0;
+    	            DPh = DPhsup+DPhlat+DPhsen;
+    	            erro1 = DPh-DPf;
+    	
+    	            DPclat = (2*Math.pow(Gclat,2)*Lclat*fclat)/(Dh2*((D1sv+D1sl)/2));
+    	            DPcsen = (2*Math.pow(Gcsen,2)*Lcsen*fcsen)/(Dh2*((D1sl+D6)/2));
+    	            
+    	            DPcsup = 0;
+    	            DPc=DPcsup+DPclat+DPcsen;
+    	            erro2=DPc-DP6;
+    	
+    	            Afrh = Aho/cf1;
+    	            Afrc = Aco/cf2;
+    	
+    	            L3=Afrh/Lc;
+    	            Vhx=L3*Lc*Lh;
+    	            //% L3c=Afrc/Lh;
+    	            
+    	            fcsup = 0;
+    	            fhsup = 0;
+        		}
 
             if(SUP == 0){
                 Ghsup=0;
