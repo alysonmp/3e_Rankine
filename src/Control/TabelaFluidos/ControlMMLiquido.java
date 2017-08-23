@@ -81,28 +81,28 @@ public class ControlMMLiquido {
         temperatura += 1;
         do{
             temperatura -= 1;
-            SQLQuery consulta = this.session.createSQLQuery("select * from MM where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
+            SQLQuery consulta = this.session.createSQLQuery("select * from MM_liquido where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMMLiquido.class));//Sem isso aqui impossível de retornar
             List<ModelMMLiquido> MMs = consulta.list(); 
             if(!MMs.isEmpty())
                 MM1 = MMs.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MM where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from MM_liquido where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMMLiquido.class));//Sem isso aqui impossível de retornar
             MMs = consulta.list();
             if(!MMs.isEmpty())
                 MM2 = MMs.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MM where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
+            consulta = this.session.createSQLQuery("select * from MM_liquido where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMMLiquido.class));//Sem isso aqui impossível de retornar
             MMs = consulta.list();
             if(!MMs.isEmpty())
                 MM3 = MMs.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MM where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from MM_liquido where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMMLiquido.class));//Sem isso aqui impossível de retornar
             MMs = consulta.list();

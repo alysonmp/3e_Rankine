@@ -18,6 +18,10 @@ public class ControlZeta {
     private double Zl, Zv, Z;
     private double ter1, ter2, ter3, ter4, Z1m, Z2m;
 
+    private ModelComplexo complexo3;
+    private ModelComplexo complexo2;
+    private ModelComplexo complexo1;
+    
     public ControlZeta(double A, double B, double C) {
 
         ter1 = 1;
@@ -28,9 +32,9 @@ public class ControlZeta {
         cubica = new ControlCubica();
         cubica.solve(ter1, ter2, ter3, ter4);
 
-        ModelComplexo complexo1 = cubica.getComplexo1();
-        ModelComplexo complexo2 = cubica.getComplexo2();
-        ModelComplexo complexo3 = cubica.getComplexo3();
+        complexo1 = cubica.getComplexo1();
+        complexo2 = cubica.getComplexo2();
+        complexo3 = cubica.getComplexo3();
             
         double x1 = complexo1.getReal();
         double x2 = complexo2.getReal();
@@ -60,13 +64,7 @@ public class ControlZeta {
             }else if(complexo3.getImaginario() == 0){
                 Z1m = x3;
             }else{
-                if(x1 > x2 && x1 > x3){
-                    Z1m = complexo1.abs();
-                }else if(x2 > x3){
-                    Z1m = complexo2.abs();
-                }else{
-                    Z1m = complexo3.abs();
-                }
+                Z1m = 0;
                 
             }
             
@@ -77,13 +75,7 @@ public class ControlZeta {
             }else if(complexo3.getImaginario() == 0){
                 Z2m = x3;
             }else{
-                if(x1 < x2 && x1 < x3){
-                    Z2m = complexo1.abs();
-                }else if(x2 < x3){
-                    Z2m = complexo2.abs();
-                }else{
-                    Z2m = complexo3.abs();
-                }
+                Z2m = 0;
             }
             
         }
@@ -114,6 +106,30 @@ public class ControlZeta {
     public void setZ(double Z) {
         this.Z = Z;
     }
+
+	public ModelComplexo getComplexo3() {
+		return complexo3;
+	}
+
+	public void setComplexo3(ModelComplexo complexo3) {
+		this.complexo3 = complexo3;
+	}
+
+	public ModelComplexo getComplexo2() {
+		return complexo2;
+	}
+
+	public void setComplexo2(ModelComplexo complexo2) {
+		this.complexo2 = complexo2;
+	}
+
+	public ModelComplexo getComplexo1() {
+		return complexo1;
+	}
+
+	public void setComplexo1(ModelComplexo complexo1) {
+		this.complexo1 = complexo1;
+	}
     
     
     

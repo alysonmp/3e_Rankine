@@ -105,13 +105,13 @@ public class ControlButanoGas {
         double t1 = ((temperatura - butano_gas1.getTEMPERATURA())/(butano_gas2.getTEMPERATURA() - butano_gas1.getTEMPERATURA()));
         double t2 = ((temperatura - butano_gas3.getTEMPERATURA())/(butano_gas4.getTEMPERATURA() - butano_gas3.getTEMPERATURA()));
 
-        Cpv2 = butano_gas1.getCPV() + (butano_gas2.getCPV() - butano_gas1.getCPV()) * t1;
+        Cpv1 = butano_gas1.getCPV() + (butano_gas2.getCPV() - butano_gas1.getCPV()) * t1;
         Cpv2 = butano_gas3.getCPV() + (butano_gas4.getCPV() - butano_gas3.getCPV()) * t2;
         Cpv = Cpv1 + (Cpv2 - Cpv1) * p;
         
         Prv1 = butano_gas1.getPRV() + (butano_gas2.getPRV() - butano_gas1.getPRV()) * t1;
         Prv2 = butano_gas3.getPRV() + (butano_gas4.getPRV() - butano_gas3.getPRV()) * t2;
-        Prv2 = Prv1 + (Prv2 - Prv1) * p;
+        Prv = Prv1 + (Prv2 - Prv1) * p;
         
         kv1 = butano_gas1.getKV() + (butano_gas2.getKV() - butano_gas1.getKV()) * t1;
         kv2 = butano_gas3.getKV() + (butano_gas4.getKV() - butano_gas3.getKV()) * t2;

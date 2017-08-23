@@ -47,7 +47,7 @@ public class ModelMD2MGas implements Serializable{
     public ModelMD2MGas() {
     }
 
-    public ModelMD2MGas(double pressao, double temperatura, double kv, double Cpv, double Prv, double Muv, double Vcv) {
+    public ModelMD2MGas(double pressao, double temperatura, double Cpv, double Prv, double kv, double Muv, double Vcv) {
         this.pressao = pressao;
         this.temperatura = temperatura;
         this.kv = kv;

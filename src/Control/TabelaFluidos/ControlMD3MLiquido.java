@@ -81,28 +81,28 @@ public class ControlMD3MLiquido {
         temperatura += 1;
         do{
             temperatura -= 1;
-            SQLQuery consulta = this.session.createSQLQuery("select * from MD3M where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
+            SQLQuery consulta = this.session.createSQLQuery("select * from MD3M_liquido where pressao <= " +pressao+ "and temperatura <= " +temperatura+ "ORDER BY ID DESC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMD3MLiquido.class));//Sem isso aqui impossível de retornar
             List<ModelMD3MLiquido> MD3Ms = consulta.list(); 
             if(!MD3Ms.isEmpty())
                 MD3M1 = MD3Ms.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MD3M where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from MD3M_liquido where pressao <= "+pressao+" and temperatura >= "+temperatura+" ORDER BY PRESSAO DESC, TEMPERATURA ASC FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMD3MLiquido.class));//Sem isso aqui impossível de retornar
             MD3Ms = consulta.list(); 
             if(!MD3Ms.isEmpty())
                 MD3M2 = MD3Ms.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MD3M where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
+            consulta = this.session.createSQLQuery("select * from MD3M_liquido where pressao >= "+pressao+" and temperatura <= "+temperatura+" ORDER BY PRESSAO ASC, TEMPERATURA DESC");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMD3MLiquido.class));//Sem isso aqui impossível de retornar
             MD3Ms = consulta.list(); 
             if(!MD3Ms.isEmpty())
                 MD3M3 = MD3Ms.get(0);
 
-            consulta = this.session.createSQLQuery("select * from MD3M where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
+            consulta = this.session.createSQLQuery("select * from MD3M_liquido where pressao >= " +pressao+ "and temperatura >= " +temperatura+ " FETCH FIRST 1 ROWS ONLY");
 
             consulta.setResultTransformer(Transformers.aliasToBean(ModelMD3MLiquido.class));//Sem isso aqui impossível de retornar
             MD3Ms = consulta.list(); 

@@ -32,7 +32,26 @@ public class ControlH_Dep {
                 HDL=0;
                 HDV=-((T*(da_dT)-constantes.geta())/(2*constantes.getb()*(Math.pow(2,0.5))))*Math.log((zeta.getZv()+constantes.getB()*(1-(Math.pow(2,0.5))))/(zeta.getZv()+constantes.getB()*(1+(Math.pow(2,0.5)))))+ (zeta.getZv()-1)*constantes.getR()*T;
         }else if(dif < 0.0001){
-    //        
+        		if(zeta.getZv() == 0) {
+        			if(zeta.getComplexo1().getReal() > zeta.getComplexo2().getReal() && zeta.getComplexo1().getReal() > zeta.getComplexo3().getReal()){
+                    zeta.setZv(zeta.getComplexo1().abs());
+                }else if(zeta.getComplexo2().getReal() > zeta.getComplexo3().getReal()){
+                		zeta.setZv(zeta.getComplexo2().abs());
+                }else{
+                		zeta.setZv(zeta.getComplexo3().abs());
+                }
+        		}
+        		
+        		if(zeta.getZl() == 0) {
+        			if(zeta.getComplexo1().getReal() < zeta.getComplexo2().getReal() && zeta.getComplexo1().getReal() < zeta.getComplexo3().getReal()){
+                    zeta.setZl(zeta.getComplexo1().abs());
+                }else if(zeta.getComplexo2().getReal() < zeta.getComplexo3().getReal()){
+                		zeta.setZl(zeta.getComplexo2().abs());
+                }else{
+                		zeta.setZl(zeta.getComplexo3().abs());
+                }
+        		}
+        	
       //      HDV=-((T*(da_dT)-a)/(2*b*(2^0.5)))*log((Zv+B*(1-(2^0.5)))/(Zv+B*(1+(2^0.5))))+ (Zv-1)*R*T;
                 /*double aux = T;
                 while(zeta.getZl() == zeta.getZv()){

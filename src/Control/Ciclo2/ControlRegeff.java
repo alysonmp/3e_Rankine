@@ -53,7 +53,7 @@ public class ControlRegeff {
         
         Criteria cr = session.createCriteria(ModelCriticasKCSMat_PM.class);
         List results = cr.list();
-        ModelCriticasKCSMat_PM PMii = (ModelCriticasKCSMat_PM)results.get(ii);
+        ModelCriticasKCSMat_PM PMii = (ModelCriticasKCSMat_PM)results.get(ii-1);
         ModelCriticasKCSMat_PM PM1 = (ModelCriticasKCSMat_PM)results.get(1);
 
         ControlConstantes constantes = new ControlConstantes(T6, P6, ii, session);
@@ -75,17 +75,16 @@ public class ControlRegeff {
         
         
         if(eff==0){
-            NTU=0;
-            ep=0;
-            Nc=0;
-            Nh=0;
-            Gh=0;
-            Gc=0;
-            Acc=0;
-            Ach=0; 
-            Cregmin = 0;
-            Ghsup = 0;
-            Gcsup = 0;
+            AT = 0;
+            Aho = 0;
+            Aco = 0;
+            Vhx = 0;
+            Lh = 0;
+            Lc = 0;
+            L3 = 0;
+            DPh = 0;
+            DPc = 0;
+            return;
         }else{
             double Ccreg=(m*(PMii.getValor())*((Cp5+Cp6)/2))/1000;
             double Chreg=(m*(PMii.getValor())*((Cp2+Cp3)/2))/1000;
@@ -109,7 +108,7 @@ public class ControlRegeff {
         results = cr.list();
         ModelCore core = (ModelCore) results.get(0);
         
-        double Dh1 = core.getDh();
+        double Dh1 = core.getDh()/1000;
         double alp1 = core.getAlp();
         double del1 = core.getDel();
         double gam1 = core.getGam();
@@ -125,7 +124,7 @@ public class ControlRegeff {
         results = cr.list();
         core = (ModelCore) results.get(0);
         
-        double Dh2 = core.getDh();
+        double Dh2 = core.getDh()/1000;
         double alp2 = core.getAlp();
         double del2 = core.getDel();
         double gam2 = core.getGam();
@@ -144,8 +143,14 @@ public class ControlRegeff {
         double erro1=1;
         double erro2=1;
         
+        int cont = 0;
+        
         while(erro1>0 || erro2>0){
-
+	    		cont++;
+			if(cont == 300) {
+				break;
+			}
+        	
             Rehsup= (Ghsup*Dh1)/((MU3+MU2)/2);
             fhsup= (9.6243*Math.pow(Rehsup,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehsup,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
             jhsup= (0.6522*Math.pow(Rehsup,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehsup,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);

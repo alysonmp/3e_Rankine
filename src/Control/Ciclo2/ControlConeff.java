@@ -11,9 +11,9 @@ import org.hibernate.criterion.Restrictions;
 
 public class ControlConeff {
 
-    private double AT, Aho, Aco, Vhx, Lh, Lc, L3, Dph, Dpc;
+    private double AT, Aho, Aco, Vhx, Lh, Lc, L3, DPh, DPc;
     
-    public ControlConeff(double P4,double P3, double m, double mH2O, int ii, double Ten, double Ten1, double Ts, double T3, double T4, double UACONs, double UACONl, double Pen, double km, int coreInt, Session session) {
+    public ControlConeff(double P4,double P3, double m, double mH2O, int ii, double Ten, double Ten1, double Ts, double T3, double T4, double UACONs, double UACONl, double Pen, double km, int coreInt, double SUP, Session session) {
        
         double Ghsup,Gcsup,Achlat,Achsup,epCONs,NTUsup,Ncsup,Nhsup,Accsup,
                 Cclat,Chlat,Clatmin,Ckatmax,C,Ntulat,epCONl,NcCONl,NhCONl,
@@ -25,7 +25,7 @@ public class ControlConeff {
         
         double iUsup, Ugsup,iUlat,Uglat,Ahsup,Ahlat,Ahosup,Aholat,Acsup,
                     Aclat,Acosup,Acolat,Lcsup,Lclat,Lhsup,Lhlat,DPhsup,DPhlat,
-                    DPh,DPcsup,DPclat,DPc, Afrh,Afrc,Csupmin;
+                    DPcsup,DPclat, Afrh,Afrc,Csupmin;
         
         Criteria cr = session.createCriteria(ModelCriticasKCSMat_PM.class);
         List results = cr.list();
@@ -199,95 +199,179 @@ public class ControlConeff {
         double erro1=1;
         double erro2=1;
         
+        double cont = 0;
+        
         while(erro1>0 || erro2>0){
-
-            Rehsup= (Ghsup*Dh1)/((MU3+MU4v)/2);
-            Rehlat= (Ghlat*Dh1)/((MU4v+MU4)/2);
-            fhsup= (9.6243*Math.pow(Rehsup,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehsup,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
-            fhlat= (9.6243*Math.pow(Rehlat,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehlat,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
-            jhsup= (0.6522*Math.pow(Rehsup,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehsup,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
-            jhlat= (0.6522*Math.pow(Rehlat,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehlat,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
-
-            Recsup= (Gcsup*Dh2)/((MUen1+MUs)/2);
-            Reclat= (Gclat*Dh2)/((MUen+MUen1)/2);
-            fcsup= (9.6243*Math.pow(Recsup,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Recsup,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
-            fclat= (9.6243*Math.pow(Reclat,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Reclat,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
-            jcsup= (0.6522*Math.pow(Recsup,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Recsup,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
-            jclat= (0.6522*Math.pow(Reclat,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Reclat,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
-
-            hhsup= jhsup*Ghsup*((Cp3+Cp4v)/2)/Math.pow(Pr3,(0.666666667)); 
-            hhlat= jhlat*Ghlat*((Cp4+Cp4v)/2)/Math.pow(Pr4v,(0.6666666667)); 
-
-            hcsup= jcsup*Gcsup*((Cpen1+Cps)/2)/Math.pow(Prs,(0.666666667)); 
-            hclat= jclat*Gclat*((Cpen+Cpen1)/2)/Math.pow(Pren1,(0.6666666667)); 
-            
-            m1sup= Math.pow((((2*hhsup)/(km*t1))*(1+(t1/l1))),0.5);
-            m1lat= Math.pow((((2*hhlat)/(km*t1))*(1+(t1/l1))),0.5);
-            lh=0.5*(b1-t1);
-
-            m2sup=Math.pow((((2*hcsup)/(km*t2))*(1+(t2/l2))),0.5);
-            m2lat=Math.pow((((2*hclat)/(km*t2))*(1+(t2/l2))),0.5);
-            lc=0.5*(b2-t2);
-
-            e1sup= (Math.tanh(m1sup*lh))/(m1sup*lh);  
-            e1lat= (Math.tanh(m1lat*lh))/(m1lat*lh);
-
-            e2sup= (Math.tanh(m2sup*lc))/(m2sup*lc);
-            e2lat= (Math.tanh(m2lat*lc))/(m2lat*lc);
-
-            e1gsup= 1-(1-e1sup)*por1;
-            e1glat= 1-(1-e1lat)*por1;
-
-            e2gsup= 1-(1-e2sup)*por2;
-            e2glat= 1-(1-e2lat)*por2;
-            
-            iUsup=(1/(e1gsup*hhsup))+(AA/(e2gsup*hcsup));
-            Ugsup=1/iUsup;
-            iUlat=(1/(e1glat*hhlat))+(AA/(e2glat*hclat));
-            Uglat=1/iUlat;
-
-            Ahsup=NTUsup*Csupmin/(Ugsup/1000);
-            Ahlat=NTUlat*Clatmin/(Uglat/1000);
-            AT=Ahsup+Ahlat;
-            Ahosup=(m*PMii.getValor())/Ghsup;
-            Aholat=(m*PMii.getValor())/Ghlat;
-
-            Acsup=Ahsup/AA;
-            Aclat=Ahlat/AA;
-            Acosup=(mH2O*PM1.getValor())/Gcsup;
-            Acolat=(mH2O*PM1.getValor())/Gclat;
-
-            Aho= Double.max(Ahosup,Aholat);
-            Aco= Double.max(Acosup,Acolat);
-
-            Lcsup=(Dh2*Acsup)/(4*Aco);
-            Lclat=(Dh2*Aclat)/(4*Aco);
-            Lc=Lcsup+Lclat;
-            Lhsup=(Dh1*Ahsup)/(4*Aho);
-            Lhlat=(Dh1*Ahlat)/(4*Aho);
-            Lh=Lhsup+Lhlat;
-            
-            Ghsup=(m*PMii.getValor())/Aho;
-            Ghlat=(m*PMii.getValor())/Aho;
-            Gcsup=(mH2O*PM1.getValor())/Aco;
-            Gclat=(mH2O*PM1.getValor())/Aco;
-
-            DPhsup= (2*Math.pow(Ghsup,2)*Lhsup*fhsup)/(Dh1*((D3+D4v)/2));
-            DPhlat= (2*Math.pow(Ghlat,2)*Lhlat*fhlat)/(Dh1*((D4v+D4)/2));
-            DPh=DPhsup+DPhlat;
-            erro1=DPh-DP4;
-
-            DPcsup= (2*Math.pow(Gcsup,2)*Lcsup*fcsup)/(Dh2*((De1+Des)/2));
-            DPclat= (2*Math.pow(Gclat,2)*Lclat*fclat)/(Dh2*((De+De1)/2));
-            DPc=DPcsup+DPclat;
-            erro2=DPc-DPen;
-
-            Afrh=Aho/cf1;
-            Afrc=Aco/cf2;
-
-            L3=Afrh/Lc;
-
-            Vhx=L3*Lc*Lh;
+        		cont++;
+        		if(cont == 300) {
+        			break;
+        		}
+        	
+        		if(SUP != 0) {
+	            Rehsup= (Ghsup*Dh1)/((MU3+MU4v)/2);
+	            Rehlat= (Ghlat*Dh1)/((MU4v+MU4)/2);
+	            fhsup= (9.6243*Math.pow(Rehsup,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehsup,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
+	            fhlat= (9.6243*Math.pow(Rehlat,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehlat,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
+	            jhsup= (0.6522*Math.pow(Rehsup,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehsup,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
+	            jhlat= (0.6522*Math.pow(Rehlat,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehlat,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
+	
+	            Recsup= (Gcsup*Dh2)/((MUen1+MUs)/2);
+	            Reclat= (Gclat*Dh2)/((MUen+MUen1)/2);
+	            fcsup= (9.6243*Math.pow(Recsup,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Recsup,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
+	            fclat= (9.6243*Math.pow(Reclat,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Reclat,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
+	            jcsup= (0.6522*Math.pow(Recsup,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Recsup,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
+	            jclat= (0.6522*Math.pow(Reclat,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Reclat,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
+	
+	            hhsup= jhsup*Ghsup*((Cp3+Cp4v)/2)/Math.pow(Pr3,(0.666666667)); 
+	            hhlat= jhlat*Ghlat*((Cp4+Cp4v)/2)/Math.pow(Pr4v,(0.6666666667)); 
+	
+	            hcsup= jcsup*Gcsup*((Cpen1+Cps)/2)/Math.pow(Prs,(0.666666667)); 
+	            hclat= jclat*Gclat*((Cpen+Cpen1)/2)/Math.pow(Pren1,(0.6666666667)); 
+	            
+	            m1sup= Math.pow((((2*hhsup)/(km*t1))*(1+(t1/l1))),0.5);
+	            m1lat= Math.pow((((2*hhlat)/(km*t1))*(1+(t1/l1))),0.5);
+	            lh=0.5*(b1-t1);
+	
+	            m2sup=Math.pow((((2*hcsup)/(km*t2))*(1+(t2/l2))),0.5);
+	            m2lat=Math.pow((((2*hclat)/(km*t2))*(1+(t2/l2))),0.5);
+	            lc=0.5*(b2-t2);
+	
+	            e1sup= (Math.tanh(m1sup*lh))/(m1sup*lh);  
+	            e1lat= (Math.tanh(m1lat*lh))/(m1lat*lh);
+	
+	            e2sup= (Math.tanh(m2sup*lc))/(m2sup*lc);
+	            e2lat= (Math.tanh(m2lat*lc))/(m2lat*lc);
+	
+	            e1gsup= 1-(1-e1sup)*por1;
+	            e1glat= 1-(1-e1lat)*por1;
+	
+	            e2gsup= 1-(1-e2sup)*por2;
+	            e2glat= 1-(1-e2lat)*por2;
+	            
+	            iUsup=(1/(e1gsup*hhsup))+(AA/(e2gsup*hcsup));
+	            Ugsup=1/iUsup;
+	            iUlat=(1/(e1glat*hhlat))+(AA/(e2glat*hclat));
+	            Uglat=1/iUlat;
+	
+	            Ahsup=NTUsup*Csupmin/(Ugsup/1000);
+	            Ahlat=NTUlat*Clatmin/(Uglat/1000);
+	            AT=Ahsup+Ahlat;
+	            Ahosup=(m*PMii.getValor())/Ghsup;
+	            Aholat=(m*PMii.getValor())/Ghlat;
+	
+	            Acsup=Ahsup/AA;
+	            Aclat=Ahlat/AA;
+	            Acosup=(mH2O*PM1.getValor())/Gcsup;
+	            Acolat=(mH2O*PM1.getValor())/Gclat;
+	
+	            Aho= Double.max(Ahosup,Aholat);
+	            Aco= Double.max(Acosup,Acolat);
+	
+	            Lcsup=(Dh2*Acsup)/(4*Aco);
+	            Lclat=(Dh2*Aclat)/(4*Aco);
+	            Lc=Lcsup+Lclat;
+	            Lhsup=(Dh1*Ahsup)/(4*Aho);
+	            Lhlat=(Dh1*Ahlat)/(4*Aho);
+	            Lh=Lhsup+Lhlat;
+	            
+	            Ghsup=(m*PMii.getValor())/Aho;
+	            Ghlat=(m*PMii.getValor())/Aho;
+	            Gcsup=(mH2O*PM1.getValor())/Aco;
+	            Gclat=(mH2O*PM1.getValor())/Aco;
+	
+	            DPhsup= (2*Math.pow(Ghsup,2)*Lhsup*fhsup)/(Dh1*((D3+D4v)/2));
+	            DPhlat= (2*Math.pow(Ghlat,2)*Lhlat*fhlat)/(Dh1*((D4v+D4)/2));
+	            DPh=DPhsup+DPhlat;
+	            erro1=DPh-DP4;
+	
+	            DPcsup= (2*Math.pow(Gcsup,2)*Lcsup*fcsup)/(Dh2*((De1+Des)/2));
+	            DPclat= (2*Math.pow(Gclat,2)*Lclat*fclat)/(Dh2*((De+De1)/2));
+	            DPc=DPcsup+DPclat;
+	            erro2=DPc-DPen;
+	
+	            Afrh=Aho/cf1;
+	            Afrc=Aco/cf2;
+	
+	            L3=Afrh/Lc;
+	
+	            Vhx=L3*Lc*Lh;
+        		}else {
+    	            Rehlat= (Ghlat*Dh1)/((MU4v+MU4)/2);
+    	            fhlat= (9.6243*Math.pow(Rehlat,-0.7422)*Math.pow(alp1,-0.1856)*Math.pow(del1,0.3053)*Math.pow(gam1,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Rehlat,4.429)*Math.pow(alp1,0.920)*Math.pow(del1,3.767)*Math.pow(gam1,0.236))),0.1);
+    	            jhlat= (0.6522*Math.pow(Rehlat,-0.5403)*Math.pow(alp1,-0.1541)*Math.pow(del1,0.1499)*Math.pow(gam1,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Rehlat,1.340)*Math.pow(alp1,0.504)*Math.pow(del1,0.456)*Math.pow(gam1,-1.055))),0.1);
+    	
+    	            Reclat= (Gclat*Dh2)/((MUen+MUen1)/2);
+    	            fclat= (9.6243*Math.pow(Reclat,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Reclat,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
+    	            jclat= (0.6522*Math.pow(Reclat,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Reclat,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
+    	
+    	            hhlat= jhlat*Ghlat*((Cp4+Cp4v)/2)/Math.pow(Pr4v,(0.6666666667)); 
+    	
+    	            hclat= jclat*Gclat*((Cpen+Cpen1)/2)/Math.pow(Pren1,(0.6666666667)); 
+    	            
+    	            m1lat= Math.pow((((2*hhlat)/(km*t1))*(1+(t1/l1))),0.5);
+    	            lh=0.5*(b1-t1);
+    	
+    	            m2lat=Math.pow((((2*hclat)/(km*t2))*(1+(t2/l2))),0.5);
+    	            lc=0.5*(b2-t2);
+    	
+    	            e1lat= (Math.tanh(m1lat*lh))/(m1lat*lh);
+    	
+    	            e2lat= (Math.tanh(m2lat*lc))/(m2lat*lc);
+    	
+    	            e1glat= 1-(1-e1lat)*por1;
+    	
+    	            e2glat= 1-(1-e2lat)*por2;
+    	            
+    	            iUlat=(1/(e1glat*hhlat))+(AA/(e2glat*hclat));
+    	            Uglat=1/iUlat;
+    	
+    	            Ahlat=NTUlat*Clatmin/(Uglat/1000);
+    	            
+    	            Ahsup = 0;
+    	            AT=Ahsup+Ahlat;
+    	            Aholat=(m*PMii.getValor())/Ghlat;
+    	
+    	            Aclat=Ahlat/AA;
+    	            Acolat=(mH2O*PM1.getValor())/Gclat;
+    	
+    	            Aho= Aholat;
+    	            Aco= Acolat;
+    	
+    	            Lclat=(Dh2*Aclat)/(4*Aco);
+    	            
+    	            Lcsup = 0;
+    	            Lc=Lcsup+Lclat;
+    	            Lhlat=(Dh1*Ahlat)/(4*Aho);
+    	            
+    	            Lhsup = 0;
+    	            Lh=Lhsup+Lhlat;
+    	            
+    	            Ghlat=(m*PMii.getValor())/Aho;
+    	            Gcsup=(mH2O*PM1.getValor())/Aco;
+    	            Gclat=(mH2O*PM1.getValor())/Aco;
+    	
+    	            DPhlat= (2*Math.pow(Ghlat,2)*Lhlat*fhlat)/(Dh1*((D4v+D4)/2));
+    	            
+    	            DPhsup = 0;
+    	            DPh=DPhsup+DPhlat;
+    	            erro1=DPh-DP4;
+    	
+    	            DPclat= (2*Math.pow(Gclat,2)*Lclat*fclat)/(Dh2*((De+De1)/2));
+    	            
+    	            DPcsup = 0;
+    	            DPc=DPcsup+DPclat;
+    	            erro2=DPc-DPen;
+    	
+    	            Afrh=Aho/cf1;
+    	            Afrc=Aco/cf2;
+    	
+    	            L3=Afrh/Lc;
+    	
+    	            Vhx=L3*Lc*Lh;
+    	            
+    	            fcsup = 0;
+    	            fhsup = 0;
+        		}
 
             if(UACONs==0){
                Ghsup=0;
@@ -362,18 +446,18 @@ public class ControlConeff {
     }
 
     public double getDph() {
-        return Dph;
+        return DPh;
     }
 
     public void setDph(double Dph) {
-        this.Dph = Dph;
+        this.DPh = Dph;
     }
 
     public double getDpc() {
-        return Dpc;
+        return DPc;
     }
 
     public void setDpc(double Dpc) {
-        this.Dpc = Dpc;
+        this.DPc = Dpc;
     }
 }

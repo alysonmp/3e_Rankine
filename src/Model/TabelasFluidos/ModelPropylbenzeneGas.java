@@ -45,7 +45,7 @@ public class ModelPropylbenzeneGas implements Serializable{
     @Column
     private double Vcv;
 
-    public ModelPropylbenzeneGas(double pressao, double temperatura, double kv, double Cpv, double Prv, double Muv, double Vcv) {
+    public ModelPropylbenzeneGas(double pressao, double temperatura, double Cpv, double Prv, double kv, double Muv, double Vcv) {
         this.pressao = pressao;
         this.temperatura = temperatura;
         this.kv = kv;

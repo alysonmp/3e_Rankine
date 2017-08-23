@@ -78,6 +78,8 @@ public class ViewDadosOperacionais extends JPanel{
     private JLabel btnAtualizaPressao = new JLabel(refreshIcon[0]);
     
     private int flu = 1;
+    private double T1 = 0;
+    private int flag = 0;
     
     private ControlConverte controlConverte;
 
@@ -288,6 +290,10 @@ public class ViewDadosOperacionais extends JPanel{
                 ControlPdeVapor pdevapor = new ControlPdeVapor(Tee, flu, ctrlPrincipal.getSession());
                 
                 txtP1.setText(controlConverte.round(pdevapor.getPs2(), 2)+"");
+                
+                T1 = Double.parseDouble(txtT1.getText().toString());
+                
+                flag = 0;
             }
 
             @Override
@@ -322,9 +328,15 @@ public class ViewDadosOperacionais extends JPanel{
                 ControlT_Ref tRef = new ControlT_Ref(P1, flu, ctrlPrincipal.getSession());
                 double Tee = tRef.getTref();
                 
-                double T1 = Tee + Double.parseDouble(txtSUP.getText().toString());
+                T1 = Tee + Double.parseDouble(txtSUP.getText().toString());
                 
                 txtT1.setText(controlConverte.round(T1, 2)+"");
+                
+                flag = 1;
+                
+                if(Double.parseDouble(txtSUP.getText().toString()) != 0){
+                		flag = 0;
+                }
             }
 
             @Override
@@ -415,5 +427,21 @@ public class ViewDadosOperacionais extends JPanel{
 
 	public void setFlu(int flu) {
 		this.flu = flu;
+	}
+	
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	
+	public double getT1() {
+		return T1;
+	}
+
+	public void setT1(double T1) {
+		this.T1 = T1;
 	}
 }
