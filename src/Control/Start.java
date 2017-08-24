@@ -303,16 +303,16 @@ public class Start {
         ViewSaida saida = new ViewSaida();
         double AT = ATcon+ATevp+ATreg;
         
-        saida.getTxtWt().setText(""+round(Wt, 3));
-        saida.getTxtWb().setText(""+round(Wb, 3));
-        saida.getTxtWn().setText(""+round(Wn, 3));
-        saida.getTxtQevp().setText(""+round(Qevp, 3));
-        saida.getTxtQcon().setText(""+round(Qcon, 3));
-        saida.getTxtQreg().setText(""+round(Qreg, 3));
-        saida.getTxtAt().setText(""+round(AT, 3));
-        saida.getTxtATevp().setText(""+round(ATevp, 3));
-        saida.getTxtATcon().setText(""+round(ATcon, 3));
-        saida.getTxtATreg().setText(""+round(ATreg, 3));
+        saida.getTxtWt().setText(round(Wt, 3)+" kW");
+        saida.getTxtWb().setText(round(Wb, 3)+" kW");
+        saida.getTxtWn().setText(round(Wn, 3)+" kW");
+        saida.getTxtQevp().setText(round(Qevp, 3)+" kJ/s");
+        saida.getTxtQcon().setText(round(Qcon, 3)+" kJ/s");
+        saida.getTxtQreg().setText(round(Qreg, 3)+" kJ/s");
+        saida.getTxtAt().setText(round(AT, 3)+" m²");
+        saida.getTxtATevp().setText(round(ATevp, 3)+" m²");
+        saida.getTxtATcon().setText(round(ATcon, 3)+" m²");
+        saida.getTxtATreg().setText(round(ATreg, 3)+" m²");
     }   
     
     public double round(double value, int places) {
