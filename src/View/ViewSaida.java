@@ -15,28 +15,28 @@ public class ViewSaida extends JFrame{
 	JPanel painelSaida;
 	
 	//LABELS
-	JLabel lblWt = new JLabel("Wt");
-	JLabel lblWn = new JLabel("Wn");
-	JLabel lblWb = new JLabel("Wb");
+	JLabel lblWt = new JLabel("<html>W<sub>t</sub></html>");
+	JLabel lblWn = new JLabel("<html>W<sub>n</sub></html>");
+	JLabel lblWb = new JLabel("<html>W<sub>b</sub></html>");
 	JLabel lblQevp = new JLabel("<html>Q<sub>evp</sub></html>");
-	JLabel lblQcon = new JLabel("<html>Q<sub>Con</sub></html>");
+	JLabel lblQcon = new JLabel("<html>Q<sub>con</sub></html>");
 	JLabel lblQreg = new JLabel("<html>Q<sub>reg</sub></html>");
-	JLabel lblATevp = new JLabel("<html>At<sub>evp</sub></html>");
-	JLabel lblATcon = new JLabel("<html>At<sub>con</sub></html>");
-	JLabel lblATreg = new JLabel("<html>At<sub>reg</sub></html>");
-	JLabel lblAt = new JLabel("At");
+	JLabel lblATevp = new JLabel("<html>A<sub>evp</sub></html>");
+	JLabel lblATcon = new JLabel("<html>A<sub>con</sub></html>");
+	JLabel lblATreg = new JLabel("<html>A<sub>reg</sub></html>");
+	JLabel lblAt = new JLabel("AT");
 	
 	//FIELDS
-	JLabel txtWt = new JLabel("0");
-	JLabel txtWn = new JLabel("0");
-	JLabel txtWb = new JLabel("0");
-	JLabel txtQevp = new JLabel("0");
-	JLabel txtQcon = new JLabel("0");
-	JLabel txtQreg = new JLabel("0");
-	JLabel txtATevp = new JLabel("0");
-	JLabel txtATcon = new JLabel("0");
-	JLabel txtATreg = new JLabel("0");
-	JLabel txtAt = new JLabel("0");
+	JLabel txtWt = new JLabel("0 kW");
+	JLabel txtWn = new JLabel("0 kW");
+	JLabel txtWb = new JLabel("0 kW");
+	JLabel txtQevp = new JLabel("0 kJ/s");
+	JLabel txtQcon = new JLabel("0 kJ/s");
+	JLabel txtQreg = new JLabel("0 kJ/s");
+	JLabel txtATevp = new JLabel("0 m²");
+	JLabel txtATcon = new JLabel("0 m²");
+	JLabel txtATreg = new JLabel("0 m²");
+	JLabel txtAt = new JLabel("0 m²");
 	
 	public ViewSaida() {
 		
