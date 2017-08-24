@@ -6,6 +6,7 @@ import Control.Ciclo2.ControlBomba;
 import Control.Ciclo2.ControlConeff;
 import Control.Ciclo2.ControlEvpeff;
 import Control.Ciclo2.ControlMassa;
+import Control.Ciclo2.ControlMassa1;
 import Control.Ciclo2.ControlParametros;
 import Control.Ciclo2.ControlRegeff;
 import Control.Ciclo2.ControlRegenerador;
@@ -202,19 +203,48 @@ public class Start {
         double IHR = regenerador.getIHR();
         eff = IHR;
 
-        ControlMassa massa = new ControlMassa(H4, H1, H6, P1, ii, Pref, Tref, T1, T6, SUP, PINCH, mf, Tf, Pf, compressor, session);
-        if(!massa.getMensagem().equals("")){
-            JOptionPane.showMessageDialog(null,massa.getMensagem(),"Error",0);
-            return;
+        double m;
+        double Q;
+        double Tfout;
+        double Hlat;
+        double Hsen;
+        double Hsup;
+        double T1s;
+        double PP;
+        
+        if(FON == 1 || FON == 2) {
+        		ControlMassa1 massa = new ControlMassa1(H4, H1, H6, P1, ii, Pref, Tref, T1, T6, SUP, FON, PINCH, mf, Tf, Pf, session);
+        		
+        		if(!massa.getMensagem().equals("")){
+    	            JOptionPane.showMessageDialog(null,massa.getMensagem(),"Error",0);
+    	            return;
+    	        }
+        		
+        		m = massa.getM();
+            Q = massa.getQ();
+            Tfout = massa.getTfout();
+            Hlat = massa.getHlat();
+            Hsen = massa.getHsen();
+            Hsup = massa.getHsup();
+            T1s = massa.getT1s();
+            PP = massa.getPINCH();
+        }else {
+	        ControlMassa massa = new ControlMassa(H4, H1, H6, P1, ii, Pref, Tref, T1, T6, SUP, PINCH, mf, Tf, Pf, compressor, session);
+	        if(!massa.getMensagem().equals("")){
+	            JOptionPane.showMessageDialog(null,massa.getMensagem(),"Error",0);
+	            return;
+	        }
+	        
+	        m = massa.getM();
+	        Q = massa.getQ();
+	        Tfout = massa.getTfout();
+	        Hlat = massa.getHlat();
+	        Hsen = massa.getHsen();
+	        Hsup = massa.getHsup();
+	        T1s = massa.getT1s();
+	        PP = massa.getPINCH();
         }
-        double m = massa.getM();
-        double Q = massa.getQ();
-        double Tfout = massa.getTfout();
-        double Hlat = massa.getHlat();
-        double Hsen = massa.getHsen();
-        double Hsup = massa.getHsup();
-        double T1s = massa.getT1s();
-        double PP = massa.getPINCH();
+        
         
         ControlSF sf = new ControlSF(T2, P2, ii, m, H2s, session);
         double sp = sf.getSp();
