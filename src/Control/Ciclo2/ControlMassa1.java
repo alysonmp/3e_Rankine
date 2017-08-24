@@ -43,26 +43,26 @@ public class ControlMassa1 {
 		
 		if(FON == 1) {
 			hSistema = new ControlH_Sistema(Tf, Pf, Pref, Tref, 1, session);
-		    double HL = hSistema.getHL();
-		    double HV = hSistema.getHV();
-		    double Hin = HL + (titulo*(HV-HL)) ;
-		   
-		    hSistema = new ControlH_Sistema(Tf2, Pf, Pref, Tref, 1, session);
-		    double HLb = hSistema.getHL();
-		    double HVb = hSistema.getHV();
+			double HL = hSistema.getHL();
+			double HV = hSistema.getHV();
+			double Hin = HL + (titulo*(HV-HL)) ;
+			   
+			hSistema = new ControlH_Sistema(Tf2, Pf, Pref, Tref, 1, session);
+			double HLb = hSistema.getHL();
+			double HVb = hSistema.getHV();
+			    
+			ControlT_Ref tRef = new ControlT_Ref(Pf, 1, session);
+			double Tag = tRef.getTref();
 		    
-		    ControlT_Ref tRef = new ControlT_Ref(Pf, 1, session);
-		    double Tag = tRef.getTref();
-		    
-	       if(Tag < Tf2) {
-	           Hsat = HVb;
-	           tit = 1;
-	       }else {  
-               Hsat = HLb;
-               tit = 0;
-	       }
-		       
-		   Qfon1=(Hin-Hsat)*mf;
+			if(Tag < Tf2) {
+			      Hsat = HVb;
+			      tit = 1;
+			}else {  
+			      Hsat = HLb;
+			      tit = 0;
+			}
+					       
+			Qfon1=(Hin-Hsat)*mf;
 		}else {
 			ControlExergia_Gases exergia = new ControlExergia_Gases(mf, Tf, X, session);
 			double Ein = exergia.getEin();
