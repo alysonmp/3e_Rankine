@@ -28,7 +28,7 @@ public class ControlExergia_Gases {
         
         double To = 298.15;
         double T = Tf;
-        XTOTAL=X[1] + X[2] + X[3] + X[4] + X[5] + X[6] + X[7] + X[8];
+        XTOTAL=X[0] + X[1] + X[2] + X[3] + X[4] + X[5] + X[6] + X[7];
         
         double DHCO2 = ((((ModelConsExeMatA)results.get(0)).getValores()[0]*T)+((((ModelConsExeMatA)results.get(0)).getValores()[1]/1000)*Math.pow(T,2))+((((ModelConsExeMatA)results.get(0)).getValores()[2]*100000)/T)+(((ModelConsExeMatA)results.get(0)).getValores()[3]))*4.186;
         double DHH2O = ((((ModelConsExeMatA)results.get(1)).getValores()[0]*T)+((((ModelConsExeMatA)results.get(1)).getValores()[1]/1000)*Math.pow(T,2))+((((ModelConsExeMatA)results.get(1)).getValores()[2]*100000)/T)+(((ModelConsExeMatA)results.get(1)).getValores()[3]))*4.186;
@@ -50,7 +50,7 @@ public class ControlExergia_Gases {
         double DSH2 = ((((ModelConsExeMatA)results.get(6)).getValores()[0]*Math.log(T/To))+((2*((ModelConsExeMatA)results.get(6)).getValores()[1]/1000)*(T-To))+(((((ModelConsExeMatA)results.get(6)).getValores()[2]/2)*100000)*((1/Math.pow(T,2))-(1/Math.pow(To,2)))))*4.1861;
         double DSNO = ((((ModelConsExeMatA)results.get(7)).getValores()[0]*Math.log(T/To))+((2*((ModelConsExeMatA)results.get(7)).getValores()[1]/1000)*(T-To))+(((((ModelConsExeMatA)results.get(7)).getValores()[2]/2)*100000)*((1/Math.pow(T,2))-(1/Math.pow(To,2)))))*4.1861;
         
-        double[] y = {X[1]/XTOTAL, X[2]/XTOTAL, X[3]/XTOTAL,  X[4]/XTOTAL, X[5]/XTOTAL,  X[6]/XTOTAL,  X[7]/XTOTAL,  X[8]/XTOTAL};
+        double[] y = {X[0]/XTOTAL, X[1]/XTOTAL, X[2]/XTOTAL,  X[3]/XTOTAL, X[4]/XTOTAL,  X[5]/XTOTAL,  X[6]/XTOTAL,  X[7]/XTOTAL};
         
         double DHECO2 = (DHCO2)*y[0];
         double DHEH2O = (DHH2O)*y[1];

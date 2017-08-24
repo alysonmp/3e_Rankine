@@ -213,14 +213,14 @@ public class Start {
         double PP;
         
         if(FON == 1 || FON == 2) {
-        		ControlMassa1 massa = new ControlMassa1(H4, H1, H6, P1, ii, Pref, Tref, T1, T6, SUP, FON, PINCH, mf, Tf, Pf, session);
-        		
-        		if(!massa.getMensagem().equals("")){
-    	            JOptionPane.showMessageDialog(null,massa.getMensagem(),"Error",0);
-    	            return;
-    	        }
-        		
-        		m = massa.getM();
+            ControlMassa1 massa = new ControlMassa1(H4, H1, H6, P1, ii, Pref, Tref, T1, T6, SUP, FON, PINCH, mf, Tf, Pf, session);
+
+            if(!massa.getMensagem().equals("")){
+                JOptionPane.showMessageDialog(null,massa.getMensagem(),"Error",0);
+                return;
+            }
+
+            m = massa.getM();
             Q = massa.getQ();
             Tfout = massa.getTfout();
             Hlat = massa.getHlat();
