@@ -5,6 +5,7 @@ import org.hibernate.Session;
 public class ControlMassa1 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private String mensagem = "";
 	
 	private double m, Q, Tfout, PINCH, Hlat, Hsen, Hsup, T1s, titulo, Hsat, tit, Qfon1, HL, HV, Hout, Hin, Burbuja, HLsat, HVsat, HLb, HVb;
@@ -96,6 +97,8 @@ public class ControlMassa1 {
 		    it=it+1;
             if(it > 10000) {
 =======
+=======
+>>>>>>> master
     private String mensagem = "";
 
     private double m, Q, Tfout, PINCH, Hlat, Hsen, Hsup, T1s, titulo, Hsat, tit, Qfon1, HL, HV, Hout, Hin, Burbuja, HLsat, HVsat, HLb, HVb;
@@ -249,6 +252,9 @@ public class ControlMassa1 {
             PINCH = PINCH + 0.1;
             it = it + 1;
             if (it > 10000) {
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
                 break;
             }
