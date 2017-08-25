@@ -93,7 +93,7 @@ public class ControlAreas {
                         mensagem = "";
                         return;
                     }
-                    exergia = new ControlExergia_Gases(mf, Tf, X, session);
+                    exergia = new ControlExergia_Gases(mf, Test, X, session);
                     double Eout = exergia.getEin();
                     Hout = exergia.getHin();
                     double Sout = exergia.getSin();
