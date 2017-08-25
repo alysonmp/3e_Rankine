@@ -6,6 +6,8 @@
 package Control.Ciclo2;
 
 import Model.ModelConsExeMatA;
+import Model.ModelConsExeMatB;
+
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -104,15 +106,24 @@ public class ControlExergia_Gases {
                 logy[qq]=0;
         }
         
-        double[] yb = new double[y.length];
-        double[] ylogy = new double[y.length];
-        double b = 1;
+        double yb = 0;
+        double ylogy = 0;
+        
+        cr = session.createCriteria(ModelConsExeMatB.class); 
+        results = cr.list();
         
         for(int i=0; i< y.length;i++){
-            ylogy[i] = y[i]*logy[i];
-            yb[i] = y[i]*b;
-            bgas += yb[i]+(8.31416*ylogy[i]*To);
+        		if(Double.isInfinite(logy[i])) {
+        			logy[i] = 0;
+        		}
+        	
+            ylogy += y[i]*logy[i];
+            
+            ModelConsExeMatB consEXEB = (ModelConsExeMatB)results.get(i);
+            yb += y[i]*consEXEB.getValores();
         }
+        
+        bgas += yb+(8.31416*ylogy*To);
         
         ET=bgas+Ein;
 
