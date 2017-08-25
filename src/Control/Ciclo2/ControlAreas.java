@@ -13,7 +13,7 @@ import org.hibernate.Session;
  */
 public class ControlAreas {
 
-    private double Acon, Areg, Aevp, UASUP, UALAT, UASEN, UACONl, UACONs, UAREG, Ten, Pen, Ten1, mH2O, Ts;
+    private double Acon, Areg, Aevp, UASUP, UALAT, UASEN, UACONl, UACONs, UAREG, Ten, Pen, Ten1, mH2O, Ts,Tf1;
     private String mensagem = "";
 
     @SuppressWarnings("empty-statement")
@@ -93,7 +93,7 @@ public class ControlAreas {
                         mensagem = "";
                         return;
                     }
-                    exergia = new ControlExergia_Gases(mf, Tf, X, session);
+                    exergia = new ControlExergia_Gases(mf, Test, X, session);
                     double Eout = exergia.getEin();
                     Hout = exergia.getHin();
                     double Sout = exergia.getSin();
@@ -265,8 +265,18 @@ public class ControlAreas {
                 Acon = 0;
             }
         }
+        Tf1=Toil2;  
+        
     }
 
+    public double getTf1() {
+        return Tf1;
+    }
+
+    public void setTf1(double Tf1) {
+        this.Tf1 = Tf1;
+    }
+    
     public double getAcon() {
         return Acon;
     }
