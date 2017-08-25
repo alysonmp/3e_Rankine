@@ -285,13 +285,14 @@ public class Start {
         double UASUP = areas.getUASUP();
         double UASEN = areas.getUASEN();
         double UALAT = areas.getUALAT();
+        double Tf1 = areas.getTf1();
         
         double ecg = ec*100;
         
         double k = Double.parseDouble(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldEvapK().getText());
         int core = Integer.parseInt(ctrlPrincipal.getViewPrincipal().getTrocadores().getFieldEvapCore().getText());
         
-        ControlEvpeff evpeff = new ControlEvpeff(P1, P6, T1, T6, ii, SUP, Hlat, Hsen, Hsup, compressor, m, mf, T1s, Tf, Tfout, Pf, FON, PINCH, UASUP, UALAT, UASEN, k, core, session);
+        ControlEvpeff evpeff = new ControlEvpeff(P1, P6, T1, T6, ii, SUP, Hlat, Hsen, Hsup, compressor, m, mf, T1s, Tf, Tfout, Pf, FON, PINCH, UASUP, UALAT, UASEN, k, core, Tf1, session);
         double ATevp = evpeff.getAT();
         double Ahoevp = evpeff.getAho();
         double Acoevp = evpeff.getAco();
