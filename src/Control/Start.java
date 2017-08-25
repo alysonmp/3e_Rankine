@@ -265,7 +265,7 @@ public class Start {
         double Qreg1 = balanco.getQreg1();
         double Wn = balanco.getWn();
 
-        ControlAreas areas = new ControlAreas(T1, T2, T3, T4, T5, T6, Tf, Tfout, Qevp, Qcon, Qreg, eff, Hlat, Hsen, Hsup, T1s, PP, SUP, m, Pref, Tref, P4, ii, H3, compressor, session);
+        ControlAreas areas = new ControlAreas(T1, T2, T3, T4, T5, T6, Tf, Tfout, Qevp, Qcon, Qreg, eff, Hlat, Hsen, Hsup, T1s, PP, SUP, m, Pref, Tref, P4, ii, H3, compressor, FON, mf, Pf , session);
         if(!areas.getMensagem().equals("")){
             JOptionPane.showMessageDialog(null,areas.getMensagem(),"Error",0);
             return;
