@@ -1,5 +1,6 @@
 package Control;
 
+import Control.Interpolacao.ControlAr;
 import Control.TabelaFluidos.ControlButanoGas;
 import Control.TabelaFluidos.ControlButanoLiquido;
 import Control.TabelaFluidos.ControlD4Gas;
@@ -281,6 +282,7 @@ public class ControlPrincipal {
             new ControlR_40Liquido(session).criaTabelaR_40Liquido();
             new ControlR_1270Gas(session).criaTabelaR_1270Gas();
             new ControlR_1270Liquido(session).criaTabelaR_1270Liquido();
+            new ControlAr(session).criaTabelaAr();
             
             tx.commit();
         }

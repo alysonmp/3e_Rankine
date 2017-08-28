@@ -41,13 +41,12 @@ public class ControlAr {
     }
     
     public void criaTabelaAr(){
-        String csvFile = "/Ciclo3/Csv/AIR.csv";
+        String csvFile = "/Csv/AIR_gas.csv";
         InputStream is = getClass().getResourceAsStream(csvFile);
         
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ";";
-        this.session = session;
         
         try {
 
