@@ -136,6 +136,7 @@ Contributor(s):
     <mapping class="Model.TabelasFluidos.ModelR_40Liquido"/>
     <mapping class="Model.TabelasFluidos.ModelCompressor"/>
     <mapping class="Model.TabelasFluidos.ModelCompressor5"/>
+    <mapping class="Model.TabelasFluidos.ModelAir"/>
     <mapping class="Model.ModelCore"/>
   </session-factory>
 </hibernate-configuration>
