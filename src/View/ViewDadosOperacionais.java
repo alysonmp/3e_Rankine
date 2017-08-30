@@ -59,7 +59,7 @@ public class ViewDadosOperacionais extends JPanel{
     private JTextField txtTcon = new JTextField("313.15");
     
     //ENTRADA
-    private JLabel labelFluidos = new JLabel("Fluído");
+    private JLabel labelFluidos = new JLabel("Fluido");
     private JComboBox<String> comboFluidos;
     
     private String[] pressoes = {"kPa", "bar", "atm"};
@@ -328,15 +328,11 @@ public class ViewDadosOperacionais extends JPanel{
                 ControlT_Ref tRef = new ControlT_Ref(P1, flu, ctrlPrincipal.getSession());
                 double Tee = tRef.getTref();
                 
-                T1 = Tee + Double.parseDouble(txtSUP.getText().toString());
+                T1 = Tee;
                 
                 txtT1.setText(controlConverte.round(T1, 2)+"");
                 
                 flag = 1;
-                
-                if(Double.parseDouble(txtSUP.getText().toString()) != 0){
-                		flag = 0;
-                }
             }
 
             @Override

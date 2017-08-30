@@ -68,9 +68,8 @@ public class Start {
             T1 = ctrlPrincipal.getViewPrincipal().getDadosOp().getT1();
         }
         
-        if(ctrlPrincipal.getViewPrincipal().getDadosOp().getFlag() == 1) {
-        		T1 += SUP;
-        }
+        	T1 += SUP;
+        
         
         int flu = ctrlPrincipal.getViewPrincipal().getDadosOp().getFlu();
         int FON = ctrlPrincipal.getViewPrincipal().getFonteCalor().getFON();
