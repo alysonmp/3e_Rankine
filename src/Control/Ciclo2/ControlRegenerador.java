@@ -108,7 +108,7 @@ public class ControlRegenerador {
             }
             
             DT13 = T6-T5;
-            if(DT13 <= 10){ 
+            if(DT13 <= 5){ 
                 mensagem = "Efetividade do trocador de calor muito alta. \nDiminuir a efetividade.";
                 return;
             }
