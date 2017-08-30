@@ -93,12 +93,12 @@ public class ControlRegeff {
             double C=Cregmin/Cregmax;
             double epsilonreg1 = (Chreg*(T2-T3))/(Cregmin*(T2-T5));
             NTU=(UAREG)/Cregmin;
-            double epsilonreg2 = 1-Math.exp((Math.exp(Math.pow(-NTU,0.78)*C)-1)*(Math.pow(NTU,0.22)/C));
+            double epsilonreg2 = 1-Math.exp((Math.exp(Math.pow(NTU,0.78)*(-C))-1)*(Math.pow(NTU,0.22)/C));
             ep = Double.min(epsilonreg1,epsilonreg2);
             double Ncreg=10*C*NTU/0.8;
             double Nhreg=1.1*NTU/0.8;
-            Ghsup=Math.pow((((0.25)/(Math.pow(Pr2,(2/3))*Nhreg))*(2*((D2+D3)/2)*DPregh)),0.5);//??
-            Gcsup=Math.pow((((0.25)/(Math.pow(Pr5,(2/3))*Ncreg))*(2*((D5+D6)/2)*DPregc)),0.5);//??
+            Ghsup=Math.pow((((0.25)/(Math.pow(Pr2,(0.666666666666))*Nhreg))*(2*((D2+D3)/2)*DPregh)),0.5);//??
+            Gcsup=Math.pow((((0.25)/(Math.pow(Pr5,(0.666666666666))*Ncreg))*(2*((D5+D6)/2)*DPregc)),0.5);//??
             Acc=(m*(PMii.getValor()))/Gcsup;
             Ach=(m*(PMii.getValor()))/Ghsup; 
         }
@@ -159,8 +159,8 @@ public class ControlRegeff {
             fcsup= (9.6243*Math.pow(Recsup,-0.7422)*Math.pow(alp2,-0.1856)*Math.pow(del2,0.3053)*Math.pow(gam2,-0.2659))*Math.pow((1+(7.669e-8*Math.pow(Recsup,4.429)*Math.pow(alp2,0.920)*Math.pow(del2,3.767)*Math.pow(gam2,0.236))),0.1);
             jcsup= (0.6522*Math.pow(Recsup,-0.5403)*Math.pow(alp2,-0.1541)*Math.pow(del2,0.1499)*Math.pow(gam2,-0.0678))*Math.pow((1+(5.269e-5*Math.pow(Recsup,1.340)*Math.pow(alp2,0.504)*Math.pow(del2,0.456)*Math.pow(gam2,-1.055))),0.1);
 
-            hhsup= jhsup*Ghsup*((Cp3+Cp2)/2)/Math.pow(Pr2,(2/3));
-            hcsup= jcsup*Gcsup*((Cp5+Cp6)/2)/Math.pow(Pr5,(2/3));
+            hhsup= jhsup*Ghsup*((Cp3+Cp2)/2)/Math.pow(Pr2,(0.666666666667));
+            hcsup= jcsup*Gcsup*((Cp5+Cp6)/2)/Math.pow(Pr5,(0.666666666667));
             
             m1sup=Math.pow((((2*hhsup)/(km*t1))*(1+(t1/l1))),0.5);
             lh=0.5*(b1-t1);
