@@ -17,16 +17,16 @@ public class ViewTrocadores extends JPanel{
 	JLabel labelEvapK = new JLabel("K");
 	
 	//Evaporador Field
-	JTextField fieldEvapCore = new JTextField("13",15);
-	JTextField fieldEvapK = new JTextField("16",15);
+	JTextField fieldEvapCore = new JTextField("0",15);
+	JTextField fieldEvapK = new JTextField("0.0",15);
 	
 	//Condensador Label
 	JLabel labelCondCore = new JLabel("Core");
 	JLabel labelCondK = new JLabel("K");
 	
 	//Condensador Field
-	JTextField fieldCondCore = new JTextField("13",15);
-	JTextField fieldCondK = new JTextField("16",15);
+	JTextField fieldCondCore = new JTextField("0",15);
+	JTextField fieldCondK = new JTextField("0.0",15);
 	
 	//Regenerador Label
 	JLabel labelRegCore = new JLabel("Core");
@@ -34,9 +34,9 @@ public class ViewTrocadores extends JPanel{
 	JLabel labelRegEff = new JLabel("<html>&isin;</html>");
 	
 	//Regenerador Field
-	JTextField fieldRegCore = new JTextField("13",15);
-	JTextField fieldRegK = new JTextField("16",15);
-	JTextField fieldRegEff = new JTextField("0",15);
+	JTextField fieldRegCore = new JTextField("0",15);
+	JTextField fieldRegK = new JTextField("0.0",15);
+	JTextField fieldRegEff = new JTextField("0.0",15);
 	
 	JPanel painelEvaporador;
 	JPanel painelRegenerador;

@@ -798,7 +798,7 @@ public class ControlPrincipal {
         viewPrincipal = new ViewPrincipal(this);
         viewPrincipal.setResizable(false);
         viewPrincipal.pack();
-        viewPrincipal.setTitle("RANKINE");
+        viewPrincipal.setTitle("ORC");
         viewPrincipal.setVisible(true);
         viewPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewPrincipal.addWindowListener(new WindowAdapter() {

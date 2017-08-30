@@ -32,9 +32,9 @@ public class ViewFonteCalor extends JPanel{
     private JLabel lblPf = new JLabel("<html>P<sub>f</sub></html>");
     private JLabel lblMf = new JLabel("<html>&#7745;<sub>f</sub></html>");
     
-    private JTextField txtTf = new JTextField("431.15");
-    private JTextField txtPf = new JTextField("1000");
-    private JTextField txtMf = new JTextField("100");
+    private JTextField txtTf = new JTextField("0.0");
+    private JTextField txtPf = new JTextField("0.0");
+    private JTextField txtMf = new JTextField("0.0");
     
     private String[] fluidos = {"Água", "Ar", "Compressor 1", "Compressor 2", "Compressor 3", "Compressor 4", "Compressor 5"};
     private JComboBox cmbCompressor = new JComboBox(fluidos);
